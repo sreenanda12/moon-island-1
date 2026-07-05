@@ -82,99 +82,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // 4. Particles.js — initialise ONCE, skip reinit on resize
-    // =========================================================================
-    const initParticles = () => {
-        if (typeof particlesJS !== 'function') return;
-
-        const isMobile = window.innerWidth < 768;
-        const starColors = ['#ffffff', '#f5e6ca'];
-
-        // Only init layers that exist in the DOM
-        if (document.getElementById('stars-far')) {
-            particlesJS('stars-far', {
-                particles: {
-                    number: { value: isMobile ? 40 : 100, density: { enable: true, value_area: 1000 } },
-                    color: { value: starColors },
-                    shape: { type: 'circle' },
-                    opacity: { value: 0.15, random: true, anim: { enable: true, speed: 0.3, opacity_min: 0.05, sync: false } },
-                    size: { value: 0.8, random: true },
-                    line_linked: { enable: false },
-                    move: { enable: true, speed: 0.35, direction: 'none', random: true, straight: false, out_mode: 'out' }
-                },
-                interactivity: { events: { onclick: { enable: false } } },
-                retina_detect: false
-            });
-        }
-
-        if (document.getElementById('stars-mid')) {
-            particlesJS('stars-mid', {
-                particles: {
-                    number: { value: isMobile ? 20 : 45, density: { enable: true, value_area: 1000 } },
-                    color: { value: starColors },
-                    shape: { type: 'circle' },
-                    opacity: { value: 0.3, random: true, anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false } },
-                    size: { value: 1.4, random: true },
-                    line_linked: { enable: !isMobile, distance: 180, color: '#ffffff', opacity: 0.06, width: 1 },
-                    move: { enable: true, speed: 0.6, direction: 'none', random: true, straight: false, out_mode: 'out' }
-                },
-                interactivity: {
-                    events: {
-                        onhover: { enable: !isMobile, mode: 'grab' },
-                        onclick: { enable: false }
-                    },
-                    modes: { grab: { distance: 160, line_linked: { opacity: 0.12 } } }
-                },
-                retina_detect: false
-            });
-        }
-
-        if (document.getElementById('stars-near')) {
-            particlesJS('stars-near', {
-                particles: {
-                    number: { value: isMobile ? 8 : 16, density: { enable: true, value_area: 1000 } },
-                    color: { value: starColors },
-                    shape: { type: 'circle' },
-                    opacity: { value: 0.55, random: true, anim: { enable: true, speed: 0.6, opacity_min: 0.35, sync: false } },
-                    size: { value: 2.2, random: true },
-                    line_linked: { enable: false },
-                    move: { enable: true, speed: 0.2, direction: 'none', random: true, straight: false, out_mode: 'out' }
-                },
-                interactivity: { events: { onhover: { enable: false }, onclick: { enable: false } } },
-                retina_detect: false
-            });
-        }
-    };
-
-    initParticles();
-
-    // =========================================================================
-    // 5. Mouse Glow + Parallax — batched in single rAF loop
+    // 4. Cinematic Night Background Parallax — batched in single rAF loop
     // =========================================================================
     if (window.innerWidth >= 1024) {
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let rafPending = false;
 
-        const far = document.getElementById('stars-far');
-        const mid = document.getElementById('stars-mid');
-        const near = document.getElementById('stars-near');
         const heroLeft = document.querySelector('.hero-left');
-        const mouseGlow = document.querySelector('.mouse-glow');
+        const desktopMoonBg = document.querySelector('.desktop-moon-bg');
+        const cloudsContainer = document.querySelector('.clouds-container');
 
         const applyParallax = () => {
             rafPending = false;
             const x = (mouseX / window.innerWidth - 0.5) * 2;
             const y = (mouseY / window.innerHeight - 0.5) * 2;
 
-            if (far) far.style.transform = `translate3d(${x * 8}px, ${y * 8}px, 0)`;
-            if (mid) mid.style.transform = `translate3d(${x * 20}px, ${y * 20}px, 0)`;
-            if (near) near.style.transform = `translate3d(${x * 32}px, ${y * 32}px, 0)`;
             if (heroLeft) heroLeft.style.transform = `translate3d(${x * -10}px, ${y * -10}px, 0)`;
-            if (mouseGlow) {
-                mouseGlow.style.left = `${mouseX}px`;
-                mouseGlow.style.top = `${mouseY}px`;
-            }
+            if (desktopMoonBg) desktopMoonBg.style.transform = `translate3d(${x * -12}px, ${y * -8}px, 0)`;
+            if (cloudsContainer) cloudsContainer.style.transform = `translate3d(${x * 12}px, ${y * 8}px, 0)`;
         };
 
         document.addEventListener('mousemove', (e) => {
