@@ -44,10 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     const navbar = document.getElementById('main-nav');
     if (navbar) {
-        const isHomePage = document.body.classList.contains('home-page');
+        const heroSection = document.querySelector('.hero-section, .page-header');
         const handleNavScroll = throttle(() => {
-            // homepage scrolled threshold is based on hero section visibility (viewport height - header offset), else 50px
-            const triggerHeight = isHomePage ? (window.innerHeight - 100) : 50;
+            // Trigger threshold is the height of the hero/header section so it changes style only after leaving the viewport
+            const triggerHeight = heroSection ? heroSection.offsetHeight : 100;
             navbar.classList.toggle('scrolled', window.scrollY > triggerHeight);
         }, 100);
         window.addEventListener('scroll', handleNavScroll, { passive: true });
