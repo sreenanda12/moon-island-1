@@ -115,6 +115,21 @@ img {
     z-index: 0;
 }
 
+/* Nebula Mist Layer - Static decoration with will-change */
+.nebula-mist {
+    position: absolute;
+    top: 5%;
+    right: -10%;
+    width: 80vw;
+    height: 80vh;
+    background: radial-gradient(circle at 85% 50%, rgba(18, 61, 117, 0.25) 0%, rgba(7, 27, 58, 0.1) 45%, transparent 70%);
+    filter: blur(60px);
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    will-change: transform;
+}
+
 .desktop-moon-bg {
     display: none;
 }
@@ -127,14 +142,80 @@ img {
         left: -4vw;
         width: 108vw;
         height: 108vh;
-        background-image: url('assets/moon_bg.png');
-        background-size: cover;
-        background-position: right center;
-        background-repeat: no-repeat;
         z-index: 1;
         will-change: transform;
-        transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform-style: preserve-3d;
     }
+}
+
+/* Inner Moon Wrapper - Static layout */
+.desktop-moon-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/moon_bg.png');
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+/* Glowing Moonlight Auras - pulsing / breathing glow (3s cycle) */
+.moon-aura-pulse {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 92% 50%, rgba(165, 210, 255, 0.45) 0%, rgba(165, 210, 255, 0.12) 35%, transparent 65%);
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    animation: breathingGlow 3s infinite ease-in-out alternate;
+}
+
+.moon-edge-scatter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 92% 50%, rgba(165, 210, 255, 0.4) 0%, rgba(165, 210, 255, 0) 42%);
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    animation: edgeLightScatter 6s infinite ease-in-out alternate;
+}
+
+/* Conic Rotating Light Rays projecting from the moon */
+.moon-light-rays {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(from 0deg at 92% 50%, transparent 0%, rgba(165, 210, 255, 0.04) 2%, transparent 4%, transparent 10%);
+    mix-blend-mode: screen;
+    z-index: 1;
+    pointer-events: none;
+    animation: rotateRays 120s infinite linear;
+}
+
+@keyframes rotateRays {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes breathingGlow {
+    0% { opacity: 0.45; transform: scale(0.92); }
+    100% { opacity: 1.0; transform: scale(1.08); }
+}
+
+@keyframes edgeLightScatter {
+    0% { opacity: 0.85; }
+    100% { opacity: 1.0; }
 }
 
 .mobile-moon-bg {
@@ -150,8 +231,6 @@ img {
         width: 108vw;
         height: 108vh;
         z-index: 1;
-        will-change: transform;
-        transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         overflow: hidden;
     }
 
@@ -160,24 +239,36 @@ img {
         height: 100%;
         background-image: url('assets/moon_bg.png');
         background-size: cover;
-        background-position: 82% center; /* 60-70% extending outside viewport on right */
+        background-position: 82% center;
         background-repeat: no-repeat;
-        animation: mobileMoonFloat 14s ease-in-out infinite alternate;
-        will-change: transform;
+        animation: mobileMoonFloatSimple 8s infinite ease-in-out alternate;
+        z-index: 1;
+    }
+
+    .mobile-moon-aura {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 82% 50%, rgba(165, 210, 255, 0.2) 0%, rgba(165, 210, 255, 0.05) 30%, transparent 60%);
+        z-index: 0;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        animation: breathingGlow 3s infinite ease-in-out alternate;
     }
 }
 
-@keyframes mobileMoonFloat {
+@keyframes mobileMoonFloatSimple {
     0% {
-        transform: translate3d(0, 0, 0) scale(1);
+        transform: translateY(0);
     }
     100% {
-        transform: translate3d(-12px, -18px, 0) scale(1.04);
+        transform: translateY(15px);
     }
 }
 
-
-/* Delicate Stars */
+/* 5 Layered Star Field Parallax Depth */
 .stars-container {
     position: absolute;
     top: 0;
@@ -185,33 +276,250 @@ img {
     width: 100%;
     height: 100%;
     z-index: 2;
+    perspective: 1200px;
+    transform-style: preserve-3d;
 }
+
+.stars-layer-1-wrap, .stars-layer-2-wrap, .stars-layer-3-wrap, .stars-layer-4-wrap, .stars-layer-5-wrap, .stars-layer-comets {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    pointer-events: none;
+}
+
+.stars-layer-1-inner { animation: driftL1 90s infinite linear; }
+.stars-layer-2-inner { animation: driftL2 80s infinite linear; }
+.stars-layer-3-inner { animation: driftL3 70s infinite linear; }
+.stars-layer-4-inner { animation: driftL4 60s infinite linear; }
+.stars-layer-5-inner { animation: driftL5 50s infinite linear; }
+
+@keyframes driftL1 { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-3%, -2%, 0); } }
+@keyframes driftL2 { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(3%, -3%, 0); } }
+@keyframes driftL3 { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-2%, 3%, 0); } }
+@keyframes driftL4 { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(4%, 2%, 0); } }
+@keyframes driftL5 { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-3%, 4%, 0); } }
 
 .star {
     position: absolute;
-    width: 2px;
-    height: 2px;
     background: #ffffff;
     border-radius: 50%;
-    opacity: 0.3;
-    animation: twinkle 4s infinite ease-in-out;
+    will-change: opacity;
+    animation: starTwinkleRandom 3.5s infinite ease-in-out;
 }
 
-@keyframes twinkle {
-    0%, 100% { opacity: 0.2; transform: scale(0.8); }
-    50% { opacity: 0.8; transform: scale(1.25); }
+@keyframes starTwinkleRandom {
+    0%, 100% { opacity: 0.15; transform: scale(0.8); }
+    50% { opacity: 0.95; transform: scale(1.25); }
 }
 
-.star-1 { top: 12%; left: 18%; animation-delay: 0s; }
-.star-2 { top: 22%; left: 42%; animation-delay: 1.5s; width: 3px; height: 3px; }
-.star-3 { top: 8%; left: 78%; animation-delay: 0.7s; }
-.star-4 { top: 38%; left: 8%; animation-delay: 2.2s; }
-.star-5 { top: 32%; left: 58%; animation-delay: 1.1s; }
-.star-6 { top: 52%; left: 88%; animation-delay: 2.8s; }
-.star-7 { top: 68%; left: 12%; animation-delay: 0.4s; width: 3px; height: 3px; }
-.star-8 { top: 62%; left: 48%; animation-delay: 1.9s; }
-.star-9 { top: 78%; left: 28%; animation-delay: 0.9s; }
-.star-10 { top: 82%; left: 72%; animation-delay: 2.4s; }
+/* Glowing Star Clusters */
+.star-cluster {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(165, 210, 255, 0.18) 0%, rgba(165, 210, 255, 0.05) 40%, transparent 70%);
+    filter: blur(8px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Flying Comet System */
+.flying-comet {
+    position: absolute;
+    width: 1.5px;
+    height: 1.5px;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 5px #ffffff;
+    animation: cometFly 22s infinite linear;
+}
+
+@keyframes cometFly {
+    0% {
+        transform: translate3d(-10vw, 0, 0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate3d(110vw, -15vh, 0);
+        opacity: 0;
+    }
+}
+
+/* Shooting Star Meteor System (highly visible) */
+.shooting-star {
+    position: absolute;
+    width: 140px;
+    height: 1.5px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.98), transparent);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    will-change: transform, opacity;
+}
+
+@keyframes shootStar {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(var(--angle, -45deg)) scaleX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.98;
+        transform: translate3d(80px, 80px, 0) rotate(var(--angle, -45deg)) scaleX(1);
+    }
+    100% {
+        transform: translate3d(450px, 450px, 0) rotate(var(--angle, -45deg)) scaleX(0.35);
+        opacity: 0;
+    }
+}
+
+/* Fireflies Particle System styling */
+.fireflies-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.firefly {
+    position: absolute;
+    width: 4.5px;
+    height: 4.5px;
+    background: radial-gradient(circle, rgba(230, 184, 92, 1) 0%, rgba(230, 184, 92, 0) 80%);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 4px #e6b85c);
+    animation: floatFirefly 14s infinite ease-in-out alternate;
+    will-change: transform, opacity;
+}
+
+@keyframes floatFirefly {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.8);
+        opacity: 0.2;
+    }
+    50% {
+        transform: translate3d(80px, -60px, 0) scale(1.2);
+        opacity: 0.98;
+    }
+    100% {
+        transform: translate3d(-40px, -110px, 0) scale(0.6);
+        opacity: 0.3;
+    }
+}
+
+/* Cosmic Dust Container and Particle Styles */
+.space-dust-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.space-dust-particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(165, 210, 255, 0.42) 0%, transparent 80%);
+    filter: blur(0.5px);
+    will-change: transform, opacity;
+}
+
+@keyframes dustFade {
+    0%, 100% {
+        opacity: 0.12;
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        opacity: 0.45;
+        transform: translate3d(var(--drift-x, 25px), var(--drift-y, -25px), 0);
+    }
+}
+
+/* Drifting Faint Moving Fog Layer */
+.fog-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 60%;
+    background: radial-gradient(ellipse at 50% 90%, rgba(10, 28, 55, 0.22) 0%, transparent 70%);
+    filter: blur(55px);
+    z-index: 1;
+    pointer-events: none;
+    animation: fogDriftSlow 40s infinite linear;
+    will-change: transform;
+}
+
+@keyframes fogDriftSlow {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(-20%, 5px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Interactive Cursor Trail Particles (larger, glowing drop-shadow) */
+.cursor-trail-particle {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: radial-gradient(circle, #e6b85c 0%, rgba(165, 210, 255, 0.8) 50%, transparent 85%);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 2.5px #e6b85c);
+    pointer-events: none;
+    z-index: 10;
+    will-change: transform, opacity;
+    animation: trailParticleFade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: center;
+}
+
+@keyframes trailParticleFade {
+    0% {
+        transform: translate3d(-50%, -50%, 0) scale(1);
+        opacity: 0.95;
+    }
+    100% {
+        transform: translate3d(calc(-50% + var(--dx, 0px)), calc(-50% + 40px), 0) scale(0.1);
+        opacity: 0;
+    }
+}
+
+/* Interactive Cursor Ripple Circle */
+.cursor-ripple {
+    position: absolute;
+    border: 1.5px solid rgba(165, 210, 255, 0.65);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 11;
+    will-change: transform, opacity;
+    animation: rippleExpand 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    transform: translate3d(-50%, -50%, 0);
+    box-shadow: 0 0 8px rgba(165, 210, 255, 0.3);
+}
+
+@keyframes rippleExpand {
+    0% { width: 0; height: 0; opacity: 1; }
+    100% { width: 100px; height: 100px; opacity: 0; }
+}
 
 /* 3D Moon System */
 .moon-system {
