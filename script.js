@@ -541,34 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bgWrapper.appendChild(fog);
         }
 
-        // 9. Shooting Stars Scheduler (increased frequency: every 5-10s)
-        const startShootingStars = () => {
-            const triggerShootingStar = () => {
-                const startY = Math.random() * 30; // top 30%
-                const startX = Math.random() * 50; // left 50%
-                const angle = -45 + (Math.random() * 12 - 6);
-                const duration = Math.random() * 0.5 + 0.7;
-                
-                const star = document.createElement('div');
-                star.className = 'shooting-star';
-                star.style.top = `${startY}%`;
-                star.style.left = `${startX}%`;
-                star.style.setProperty('--angle', `${angle}deg`);
-                star.style.animation = `shootStar ${duration}s cubic-bezier(0.25, 1, 0.5, 1) forwards`;
-                
-                bgWrapper.appendChild(star);
-                setTimeout(() => star.remove(), duration * 1000);
-            };
 
-            const scheduleNext = () => {
-                setTimeout(() => {
-                    triggerShootingStar();
-                    scheduleNext();
-                }, Math.random() * 5000 + 5000); // 5s to 10s
-            };
-            scheduleNext();
-        };
-        startShootingStars();
 
         // 10. Cursor Trailer Emitter
         const createCursorInteractions = () => {
@@ -594,6 +567,134 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { passive: true });
         };
         createCursorInteractions();
+    }
+
+    // =========================================================================
+    // 11. Services Page animations: 3D Mouse Tilt, Lift, Hover Scale & Scroll Parallax
+    // =========================================================================
+    const serviceRows = document.querySelectorAll('.service-section-row');
+    if (serviceRows.length > 0) {
+        const parallaxTargets = document.querySelectorAll('.service-image-container.parallax-target');
+        const imageCols = document.querySelectorAll('.service-image-col');
+        
+        // ─── A. Mouse Approach Follow & 3D Tilt ──────────────────────────────
+        imageCols.forEach(col => {
+            const container = col.querySelector('.service-image-container');
+            const tiltEl = col.querySelector('.service-image-tilt');
+            if (!container || !tiltEl) return;
+            
+            let isHovered = false;
+            let targetTiltX = 0;
+            let targetTiltY = 0;
+            let targetFollowX = 0;
+            let targetFollowY = 0;
+            
+            let currentTiltX = 0;
+            let currentTiltY = 0;
+            let currentFollowX = 0;
+            let currentFollowY = 0;
+            
+            const ease = 0.08; // Smooth LERP easing factor
+            
+            col.addEventListener('mousemove', (e) => {
+                if (window.innerWidth <= 991) return; // Skip on mobile
+                
+                isHovered = true;
+                const rect = container.getBoundingClientRect();
+                const containerCenterX = rect.left + rect.width / 2;
+                const containerCenterY = rect.top + rect.height / 2;
+                
+                const dx = e.clientX - containerCenterX;
+                const dy = e.clientY - containerCenterY;
+                
+                const detectionRadius = 300;
+                const distance = Math.hypot(dx, dy);
+                
+                if (distance < detectionRadius) {
+                    const factor = (detectionRadius - distance) / detectionRadius; // 1 at center, 0 at boundary
+                    
+                    // Slightly follow cursor: Max movement 20px
+                    targetFollowX = (dx / detectionRadius) * 20 * factor;
+                    targetFollowY = (dy / detectionRadius) * 20 * factor;
+                    
+                    // 3D Tilt: Max 5deg
+                    targetTiltX = -(dy / detectionRadius) * 5 * factor;
+                    targetTiltY = (dx / detectionRadius) * 5 * factor;
+                } else {
+                    targetFollowX = 0;
+                    targetFollowY = 0;
+                    targetTiltX = 0;
+                    targetTiltY = 0;
+                }
+            });
+            
+            col.addEventListener('mouseenter', () => {
+                if (window.innerWidth <= 991) return;
+                isHovered = true;
+            });
+            
+            col.addEventListener('mouseleave', () => {
+                isHovered = false;
+                targetTiltX = 0;
+                targetTiltY = 0;
+                targetFollowX = 0;
+                targetFollowY = 0;
+            });
+            
+            const animateTilt = () => {
+                currentTiltX += (targetTiltX - currentTiltX) * ease;
+                currentTiltY += (targetTiltY - currentTiltY) * ease;
+                currentFollowX += (targetFollowX - currentFollowX) * ease;
+                currentFollowY += (targetFollowY - currentFollowY) * ease;
+                
+                if (window.innerWidth > 991) {
+                    const scale = isHovered ? 1.08 : 1.0;
+                    const lift = isHovered ? -15 : 0;
+                    tiltEl.style.transform = `perspective(1000px) rotateX(${currentTiltX}deg) rotateY(${currentTiltY}deg) translate3d(${currentFollowX}px, ${lift + currentFollowY}px, 0) scale(${scale})`;
+                } else {
+                    tiltEl.style.transform = '';
+                }
+                
+                requestAnimationFrame(animateTilt);
+            };
+            
+            animateTilt();
+        });
+        
+        // ─── B. Scroll Parallax Animation ────────────────────────────────────
+        const updateScrollParallax = () => {
+            if (window.innerWidth <= 991) {
+                parallaxTargets.forEach(target => {
+                    target.style.transform = '';
+                });
+                return;
+            }
+            
+            const viewportHeight = window.innerHeight;
+            
+            parallaxTargets.forEach(target => {
+                const rect = target.getBoundingClientRect();
+                
+                if (rect.bottom > -100 && rect.top < viewportHeight + 100) {
+                    const elementCenter = rect.top + rect.height / 2;
+                    const viewportCenter = viewportHeight / 2;
+                    
+                    // Normalize progress from -1 (entering bottom) to 1 (leaving top)
+                    const scrollProgress = (viewportCenter - elementCenter) / (viewportHeight / 2 + rect.height / 2);
+                    
+                    // Range: 40px to 80px translation. Let's use 50px (total range 100px)
+                    const yOffset = -scrollProgress * 50; 
+                    
+                    target.style.transform = `translate3d(0, ${yOffset}px, 0)`;
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(updateScrollParallax);
+        }, { passive: true });
+        
+        requestAnimationFrame(updateScrollParallax);
     }
 
 });
