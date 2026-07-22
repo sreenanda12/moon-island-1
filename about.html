@@ -4,14 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Moon Island - Our Backwater Story</title>
+    <title>About Us | Moon Island - Luxury Kerala Backwater Sanctuary</title>
     <meta name="description"
-        content="Learn about Moon Island's philosophy of peace, nature, and authentic Kerala backwater experiences. Discover why we are the preferred choice for seekers of tranquility.">
-    <link rel="stylesheet" href="style.css?v=14.0">
+        content="Discover the story, philosophy, and luxury backwater sanctuary of Moon Island Kerala. Experience curated kayaking, shikkara boat rides, and boutique homestay hospitality in Alappuzha.">
+
+    <!-- Critical Preloads & Luxury Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Manrope:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=16.0">
 </head>
 
-<body>
-    <!-- Cinematic Night Sky Background -->
+<body class="about-page">
+    <!-- Cinematic Night Sky & Atmosphere Background -->
     <div class="cinematic-bg-wrapper">
         <div class="sky-gradient"></div>
         <div class="desktop-moon-bg"></div>
@@ -29,22 +34,13 @@
             <div class="star star-10"></div>
         </div>
         <div class="clouds-container">
-            <div class="cloud cloud-left">
-                <div class="cloud-shadow"></div>
-                <div class="cloud-highlight"></div>
-            </div>
-            <div class="cloud cloud-right">
-                <div class="cloud-shadow"></div>
-                <div class="cloud-highlight"></div>
-            </div>
-            <div class="cloud cloud-bottom">
-                <div class="cloud-shadow"></div>
-                <div class="cloud-highlight"></div>
-            </div>
+            <div class="cloud cloud-left"><div class="cloud-shadow"></div><div class="cloud-highlight"></div></div>
+            <div class="cloud cloud-right"><div class="cloud-shadow"></div><div class="cloud-highlight"></div></div>
+            <div class="cloud cloud-bottom"><div class="cloud-shadow"></div><div class="cloud-highlight"></div></div>
         </div>
     </div>
 
-    <!-- Navigation -->
+    <!-- Navigation Header -->
     <header class="navbar" id="main-nav">
         <div class="container nav-container">
             <a href="index.html" class="logo">
@@ -68,112 +64,434 @@
     </header>
 
     <main>
-
-        <!-- Page Header -->
-        <section class="page-header">
-            <div id="particles-js"></div>
-            <div class="container">
-                <span class="section-tag">Our Story</span>
-                <h1 class="hero-title">Welcome to Our Backwater Experience</h1>
+        <!-- ===================================================================
+             1. HERO SECTION (Full-Screen Cinematic Backwater Experience)
+             =================================================================== -->
+        <section class="about-hero-fullscreen">
+            <!-- Background Image Layer with Ken Burns Zoom & Mist -->
+            <div class="hero-bg-wrapper">
+                <img src="assets/moonlit_backwater_hero.png" alt="Kerala Moonlit Backwater" class="hero-bg-img">
+                <div class="hero-overlay-gradient"></div>
+                <div class="hero-mist-layer"></div>
             </div>
+
+            <!-- Main Content Container -->
+            <div class="container hero-content-container">
+                <div class="hero-text-block">
+                    <!-- Glassmorphism Gold Badge -->
+                    <div class="hero-badge-wrap anim-badge-fade">
+                        <span class="hero-glass-badge">ESTABLISHED 2024</span>
+                    </div>
+
+                    <!-- Heading with line-by-line reveal motion -->
+                    <h1 class="hero-title">
+                        <span class="title-line title-line-1">Where Memories</span>
+                        <span class="title-line title-line-2">Flow Naturally</span>
+                    </h1>
+
+                    <!-- Subheading -->
+                    <p class="hero-subheading anim-subheading-fade">
+                        Authentic backwater adventures and peaceful island stays.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Scroll Down Indicator -->
+            <a href="#our-story" class="hero-scroll-indicator" aria-label="Scroll to Our Story">
+                <span class="scroll-mouse">
+                    <span class="scroll-wheel"></span>
+                </span>
+                <span class="scroll-text">EXPLORE</span>
+            </a>
         </section>
 
-        <!-- Brand Story Section -->
-        <section class="about-intro reveal">
-            <div class="container">
-                <div class="split-section">
-                    <div class="split-img">
-                        <img src="assets/homestay.png" alt="Moon Island Atmosphere">
+
+        <!-- ===================================================================
+             2. OUR STORY SECTION (White Luxury Section with 3D Suitcase on Left)
+             =================================================================== -->
+        <section class="about-story-section reveal" id="our-story">
+            <div class="container about-story-container">
+                <!-- Left Side: 3D Suitcase Illustration -->
+                <div class="story-left-illustration reveal-left">
+                    <div class="story-img-glow"></div>
+                    <img src="assets/suitcsae_moon.png" alt="Moon Island 3D Suitcase Illustration" class="story-3d-suitcase-img">
+                </div>
+
+                <!-- Right Side: Content & Statistics -->
+                <div class="story-right-content reveal-right">
+                    <!-- Small Label -->
+                    <div class="story-badge-wrap reveal-item" style="--delay: 0.1s">
+                        <span class="story-badge">OUR STORY</span>
                     </div>
-                    <div class="split-content">
-                        <h2 class="section-title">A Journey of Peace</h2>
-                        <p class="text-muted">Discover the hidden beauty of Kerala’s backwaters with us. We offer a perfect blend of adventure, culture, and relaxation through unique water activities and comfortable homestay experiences. What started as a simple love for the backwaters became something more meaningful — a way to share the quiet beauty of nature with others.</p>
-                        <p class="text-muted" style="margin-top: 1rem;">We grew up around these waters, watching life move slowly and peacefully. Today, we invite travelers to experience that same calm, away from crowded places and busy schedules.</p>
+
+                    <!-- Main Heading -->
+                    <h2 class="story-heading reveal-item" style="--delay: 0.2s">
+                        A Hidden Escape<br>in Kerala's Backwaters
+                    </h2>
+
+                    <!-- Description Paragraphs -->
+                    <div class="story-description-wrap reveal-item" style="--delay: 0.3s">
+                        <p class="story-desc-p">
+                            Moon Island is a premium kayaking and nature experience destination nestled in the peaceful backwaters of Kerala. We offer unforgettable journeys through scenic waterways, combining adventure, relaxation, and authentic local charm.
+                        </p>
+                        <p class="story-desc-p">
+                            Whether you're seeking a quiet paddle beneath moonlit skies or a memorable outdoor experience with family and friends, our carefully curated activities bring you closer to nature while ensuring comfort, safety, and lasting memories.
+                        </p>
+                    </div>
+
+                    <!-- Statistics Grid -->
+                    <div class="story-stats-grid reveal-item" style="--delay: 0.4s">
+                        <div class="story-stat-card">
+                            <div class="stat-num-highlight">2+</div>
+                            <div class="stat-title-label">Years of Experience</div>
+                        </div>
+
+                        <div class="story-stat-card">
+                            <div class="stat-num-highlight">500+</div>
+                            <div class="stat-title-label">Happy Adventurers</div>
+                        </div>
+
+                        <div class="story-stat-card">
+                            <div class="stat-num-highlight">24/7</div>
+                            <div class="stat-title-label">Customer Support</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Philosophy Section -->
-        <section class="philosophy-section reveal" style="background: rgba(255,255,255,0.02);">
+        <!-- ===================================================================
+             5. MISSION & VISION (Split Layout with Animated Vertical Glowing Line)
+             =================================================================== -->
+        <section class="about-mission-vision-section reveal">
+            <!-- Large Faded Moon Texture Background -->
+            <div class="faded-moon-bg-overlay"></div>
+
+            <div class="container">
+                <div class="mission-vision-split">
+                    <!-- Mission (Left) -->
+                    <div class="mv-card mission-card">
+                        <div class="mv-card-badge">OUR PURPOSE</div>
+                        <h3 class="mv-card-title">Our Mission</h3>
+                        <p class="mv-card-text">
+                            To craft slow, authentic, and unforgettable backwater journeys that honor local traditions, protect natural ecosystems, and connect guests deeply with Kerala's living heritage. We aim to preserve the calm purity of village life while providing refined luxury.
+                        </p>
+                        <div class="mv-card-footer">
+                            <span class="mv-gold-dot"></span>
+                            <span>Authenticity • Heritage • Ecology</span>
+                        </div>
+                    </div>
+
+                    <!-- Animated Glowing Vertical Line -->
+                    <div class="mv-glowing-vertical-divider">
+                        <div class="vertical-line-glow"></div>
+                        <div class="glowing-center-pulse"></div>
+                    </div>
+
+                    <!-- Vision (Right) -->
+                    <div class="mv-card vision-card">
+                        <div class="mv-card-badge">OUR ASPIRATION</div>
+                        <h3 class="mv-card-title">Our Vision</h3>
+                        <p class="mv-card-text">
+                            To be Kerala's premier luxury boutique sanctuary—setting the standard for sustainable hospitality, personalized immersive experiences, and timeless backwater serenity. We aspire to make every stay a transformative memory for travelers worldwide.
+                        </p>
+                        <div class="mv-card-footer">
+                            <span class="mv-gold-dot"></span>
+                            <span>Excellence • Serenity • Harmony</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================
+             6. GUIDING PRINCIPLES / OUR CORE VALUES (4-Column Luxury Glass Grid)
+             =================================================================== -->
+        <section class="about-core-values-section reveal" id="core-values">
             <div class="container">
                 <div class="section-header text-center">
-                    <span class="section-tag">Our Heart</span>
-                    <h2 class="section-title">Our Backwater Philosophy</h2>
+                    <span class="section-tag-gold">GUIDING PRINCIPLES</span>
+                    <h2 class="section-main-title">Our Core Values</h2>
                 </div>
-                
-                <div class="why-us-grid">
-                    <div class="why-card">
-                        <span class="why-icon">🌿</span>
-                        <h3>Pure Nature</h3>
-                        <p>Living in harmony with the environment, preserving the pristine beauty of our backwaters.</p>
+
+                <div class="core-values-grid">
+                    <!-- Card 1: Customer Centric -->
+                    <div class="value-card-item card-anim-1">
+                        <div class="value-card-glass-bg"></div>
+                        <div class="value-icon-box icon-anim-handshake">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dfa857" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="value-card-title">Customer Centric</h3>
+                        <p class="value-card-desc">Connecting you with trusted service partners focused precisely on your needs.</p>
+                        <div class="value-card-accent-bar"></div>
                     </div>
-                    <div class="why-card">
-                        <span class="why-icon">🧘</span>
-                        <h3>Curated Relaxation</h3>
-                        <p>Every experience is designed to help you disconnect from the noise and reconnect with yourself.</p>
+
+                    <!-- Card 2: Authenticity -->
+                    <div class="value-card-item card-anim-2">
+                        <div class="value-card-glass-bg"></div>
+                        <div class="value-icon-box icon-anim-compass">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dfa857" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                            </svg>
+                        </div>
+                        <h3 class="value-card-title">Authenticity</h3>
+                        <p class="value-card-desc">Deep-rooted local expertise specializing in reliable, genuine Kerala travel solutions.</p>
+                        <div class="value-card-accent-bar"></div>
                     </div>
-                    <div class="why-card">
-                        <span class="why-icon">🤝</span>
-                        <h3>Authentic Connection</h3>
-                        <p>Deeply rooted in local culture, supporting our community while sharing our traditions.</p>
+
+                    <!-- Card 3: Affordability -->
+                    <div class="value-card-item card-anim-3">
+                        <div class="value-card-glass-bg"></div>
+                        <div class="value-icon-box icon-anim-gem">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dfa857" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 3h12l4 6-10 12L2 9z"/>
+                                <path d="M11 3 8 9l4 12 4-12-3-6"/>
+                                <path d="M2 9h20"/>
+                            </svg>
+                        </div>
+                        <h3 class="value-card-title">Affordability</h3>
+                        <p class="value-card-desc">Engineered to ensure the best possible value for families and groups without compromise.</p>
+                        <div class="value-card-accent-bar"></div>
+                    </div>
+
+                    <!-- Card 4: Reliability -->
+                    <div class="value-card-item card-anim-4">
+                        <div class="value-card-glass-bg"></div>
+                        <div class="value-icon-box icon-anim-shield">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#dfa857" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="m9 12 2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="value-card-title">Reliability</h3>
+                        <p class="value-card-desc">We are your trusted facilitators, ensuring safety and dependability across all travel needs.</p>
+                        <div class="value-card-accent-bar"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Why Choose Us Revisited -->
-        <section class="why-us-section reveal">
-            <div class="container">
-                <div class="section-header text-center">
-                    <span class="section-tag">Trust & Quality</span>
-                    <h2 class="section-title">Why Choose Us</h2>
-                </div>
-                
-                <div class="why-us-grid">
-                    <div class="why-card">
-                        <span class="why-icon">✨</span>
-                        <h3>Unique Offbeat Experiences</h3>
-                        <p>We take you where the maps don't reach.</p>
-                    </div>
-                    <div class="why-card">
-                        <span class="why-icon">🛡️</span>
-                        <h3>Safe & Organized</h3>
-                        <p>Professional equipment and licensed guides for your peace of mind.</p>
-                    </div>
-                    <div class="why-card">
-                        <span class="why-icon">💎</span>
-                        <h3>Affordable Excellence</h3>
-                        <p>Luxury experiences at price points that value your investment.</p>
-                    </div>
-                    <div class="why-card">
-                        <span class="why-icon">❤</span>
-                        <h3>Personalized Service</h3>
-                        <p>As a boutique destination, we care for each guest personally.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Final Soft CTA -->
-        <section class="final-cta reveal">
-            <div class="container text-center">
-                <h2 class="section-title">Feel the Calm</h2>
-                <p class="text-muted" style="max-width: 600px; margin: 0 auto 2.5rem;">Join us for an unforgettable journey through the heart of Kerala.</p>
-                <a href="contact.html" class="btn btn-primary">Start Your Experience</a>
+        <!-- ===================================================================
+             7. PREMIUM CALL TO ACTION (Full-Width Sunset Overlay with Fireflies)
+             =================================================================== -->
+        <!-- PREMIUM CALL TO ACTION -->
+        <section class="about-cta-section reveal premium-about-cta">
+            <div class="cta-bg-overlay"></div>
+            
+            <!-- Minimal Constellation Background SVG -->
+            <svg class="cta-editorial-constellations" viewBox="0 0 800 400" fill="none" stroke="rgba(216, 177, 90, 0.05)" stroke-width="0.8">
+                <circle cx="100" cy="120" r="1.5" fill="#D8B15A" opacity="0.2"/>
+                <circle cx="250" cy="80" r="1" fill="#D8B15A" opacity="0.15"/>
+                <circle cx="400" cy="180" r="2" fill="#D8B15A" opacity="0.25"/>
+                <line x1="100" y1="120" x2="250" y2="80"/>
+                <line x1="250" y1="80" x2="400" y2="180"/>
+            </svg>
+            
+            <!-- Animated Floating Fireflies -->
+            <div class="fireflies-container">
+                <div class="firefly" style="top: 20%; left: 15%; --x: 40px; --y: -50px; --d: 5s;"></div>
+                <div class="firefly" style="top: 60%; left: 35%; --x: -30px; --y: 40px; --d: 7s;"></div>
+                <div class="firefly" style="top: 30%; left: 75%; --x: 50px; --y: 30px; --d: 6s;"></div>
+                <div class="firefly" style="top: 75%; left: 80%; --x: -40px; --y: -40px; --d: 8s;"></div>
+                <div class="firefly" style="top: 45%; left: 50%; --x: 20px; --y: -30px; --d: 9s;"></div>
+            </div>
+
+            <!-- Subtle Reflection Shimmer -->
+            <div class="cta-reflection-shimmer"></div>
+
+            <!-- Shooting Star -->
+            <div class="cta-star-streak"></div>
+
+            <div class="container cta-editorial-grid">
+                <!-- Vertical Quote Beside Heading -->
+                <div class="cta-vertical-quote">
+                    <span class="quote-text">“Every paddle tells a story.”</span>
+                    <span class="quote-compass-wrapper">
+                        <!-- Compass Icon -->
+                        <svg class="quote-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                        </svg>
+                    </span>
+                </div>
+
+                <!-- Main Content -->
+                <div class="cta-editorial-content">
+                    <div class="cta-decor-header">
+                        <!-- Small Moon Phases symbols -->
+                        <div class="cta-moon-phases">
+                            <span class="phase">🌑</span>
+                            <span class="phase">🌒</span>
+                            <span class="phase">🌓</span>
+                            <span class="phase">🌔</span>
+                            <span class="phase">🌕</span>
+                        </div>
+                        <div class="cta-gold-divider"></div>
+                        <span class="cta-luxury-tag">MOON ISLAND EXPERIENCE</span>
+                    </div>
+
+                    <h2 class="cta-editorial-title">
+                        Discover Kerala <br>After <span class="text-gold">Sunset.</span>
+                    </h2>
+                    
+                    <p class="cta-desc">
+                        Leave behind crowded destinations. Discover peaceful backwaters and personalized experiences crafted for the nocturnal wanderer.
+                    </p>
+                    
+                    <div class="cta-action-block">
+                        <a href="contact.html" class="btn-editorial-primary">
+                            <span>Book Your Escape</span>
+                            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="services.html" class="link-editorial-text">View Experiences</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <!-- Footer -->
+    <footer class="reveal premium-footer">
+        <!-- Drifting Moon Particles -->
+        <div class="footer-particles">
+            <div class="footer-particle fp-1"></div>
+            <div class="footer-particle fp-2"></div>
+            <div class="footer-particle fp-3"></div>
+            <div class="footer-particle fp-4"></div>
+            <div class="footer-particle fp-5"></div>
+            <div class="footer-particle fp-6"></div>
+        </div>
+
         <div class="container">
-            <img src="moon_island_logoh.png-removebg-preview.png" alt="Moon Island" class="footer-logo">
-            <p class="text-muted">&copy; 2026 Moon Island. All rights reserved.</p>
-            <a href="https://www.instagram.com/intellex.web?igsh=MWZyenU0bWc3M2RxOQ==" target="_blank" class="developer-link">meet the developers</a>
+            <!-- Main Footer Grid -->
+            <div class="footer-grid">
+                <!-- Brand Column -->
+                <div class="footer-col footer-col-brand">
+                    <img src="moon_island_logoh.png-removebg-preview.png" alt="Moon Island Logo" class="footer-brand-logo">
+                    <p class="footer-brand-tagline">A Hidden Island of Calm</p>
+                    <p class="footer-brand-desc">A hidden island where calm waters, moonlit skies, and unforgettable journeys come together.</p>
+                </div>
+
+                <!-- Explore Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Experiences Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Experiences</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Kayaking</a></li>
+                        <li><a href="services.html">Shikkara Boating</a></li>
+                        <li><a href="services.html">Village Walk</a></li>
+                        <li><a href="services.html">Boutique Homestay</a></li>
+                    </ul>
+                </div>
+
+                <!-- Activities Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Activities</h4>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Coir Making</a></li>
+                        <li><a href="services.html">Leaf Weaving</a></li>
+                        <li><a href="services.html">Toddy Tapping</a></li>
+                        <li><a href="services.html">Toddy Tasting</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Contact</h4>
+                    <ul class="footer-contact-list">
+                        <li class="footer-contact-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <a href="tel:+919961577599">+91 9961 577 599</a>
+                        </li>
+                        <li class="footer-contact-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <a href="mailto:mooonisland21@gmail.com">mooonisland21@gmail.com</a>
+                        </li>
+                        <li class="footer-contact-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Alappuzha, Kerala, India</span>
+                        </li>
+                    </ul>
+                    <div class="footer-whatsapp">
+                        <a href="https://wa.me/919961577599" target="_blank" class="footer-whatsapp-btn">
+                            <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                            <span>WhatsApp Booking</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ripple Reflection -->
+        <div class="footer-ripple">
+            <svg viewBox="0 0 1440 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 10 C 360 20, 720 0, 1080 10 C 1260 15, 1380 5, 1440 10 L 1440 24 L 0 24 Z" fill="url(#footer-ripple-grad)" opacity="0.15" />
+                <path d="M0 15 C 360 5, 720 15, 1080 5 C 1260 0, 1380 10, 1440 15" stroke="rgba(165, 210, 255, 0.2)" stroke-width="1" fill="none" class="ripple-line-1" />
+                <path d="M0 8 C 400 0, 800 16, 1200 8 C 1320 4, 1400 12, 1440 8" stroke="rgba(216, 177, 90, 0.15)" stroke-width="0.8" fill="none" class="ripple-line-2" />
+                <defs>
+                    <linearGradient id="footer-ripple-grad" x1="720" y1="0" x2="720" y2="24" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#a5d2ff" stop-opacity="0.1"/>
+                        <stop offset="1" stop-color="#020617" stop-opacity="0.9"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <p class="copyright">&copy; 2026 Moon Island. All rights reserved.</p>
+                <div class="footer-socials">
+                    <a href="#" target="_blank" class="footer-social-icon" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" target="_blank" class="footer-social-icon" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <a href="https://www.instagram.com/intellex.web?igsh=MWZyenU0bWc3M2RxOQ==" target="_blank" class="developer-link">meet the developers</a>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js?v=9.0"></script>
+    <script src="script.js?v=10.0"></script>
 </body>
 
 </html>

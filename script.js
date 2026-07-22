@@ -89,6 +89,31 @@ document.addEventListener('DOMContentLoaded', () => {
         experienceCards.forEach(card => cardObserver.observe(card));
     }
 
+    // ─── 3c. Handcrafted Why Moon Island Card Tilt Interaction ───────────────
+    const interactiveCards = document.querySelectorAll('.why-card, .about-exp-card, .timeline-node');
+    if (interactiveCards.length > 0) {
+        interactiveCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 768) return;
+                const rect = card.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const mouseX = e.clientX - centerX;
+                const mouseY = e.clientY - centerY;
+
+                // Max 2 deg rotation on X and Y axes
+                const rotateX = (-mouseY / (rect.height / 2)) * 2;
+                const rotateY = (mouseX / (rect.width / 2)) * 2;
+
+                card.style.transform = `perspective(1000px) translateY(-10px) scale(1.02) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    }
+
     // =========================================================================
     // 4. Cinematic Night Background Parallax & Scroll-Zoom Loop
     // =========================================================================
@@ -697,4 +722,82 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(updateScrollParallax);
     }
 
+    // =========================================================================
+    // 9. About Page Specific Luxury Interactions & Animations
+    // =========================================================================
+
+    // ─── Kayak Story Hero Parallax & Fade-Out ────────────────────
+    const heroKayakContent = document.querySelector('.hero-kayak-content');
+    const heroKayakBgImg = document.querySelector('.hero-kayak-bg-img');
+
+    if (heroKayakContent) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            if (scrolled < 900) {
+                heroKayakContent.style.transform = `translate3d(0, ${scrolled * 0.25}px, 0)`;
+                heroKayakContent.style.opacity = Math.max(0, 1 - (scrolled / 600));
+                if (heroKayakBgImg) {
+                    heroKayakBgImg.style.transform = `scale(${1 + (scrolled * 0.00015)}) translate3d(0, ${scrolled * 0.08}px, 0)`;
+                }
+            }
+        }, { passive: true });
+    }
+
+    // ─── C. Animated Statistics Counter ──────────────────────────────────────
+    const counterElements = document.querySelectorAll('.counter-val');
+    if (counterElements.length > 0) {
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const targetNum = parseInt(el.getAttribute('data-target'), 10);
+                    let currentNum = 0;
+                    const duration = 1800; // ms
+                    const stepTime = Math.max(Math.floor(duration / (targetNum || 1)), 20);
+                    const increment = Math.max(Math.ceil(targetNum / (duration / stepTime)), 1);
+                    
+                    const timer = setInterval(() => {
+                        currentNum += increment;
+                        if (currentNum >= targetNum) {
+                            el.textContent = targetNum;
+                            clearInterval(timer);
+                        } else {
+                            el.textContent = currentNum;
+                        }
+                    }, stepTime);
+
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        counterElements.forEach(el => counterObserver.observe(el));
+    }
+
+    // =========================================================================
+    // Parallax for services page custom illustration
+    // =========================================================================
+    const parallaxIllustration = document.querySelector('.cta-parallax-illustration');
+    if (parallaxIllustration) {
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX - window.innerWidth / 2) * 0.025;
+            const y = (e.clientY - window.innerHeight / 2) * 0.025;
+            parallaxIllustration.style.setProperty('--px', `${x.toFixed(1)}px`);
+            parallaxIllustration.style.setProperty('--py', `${y.toFixed(1)}px`);
+        }, { passive: true });
+    }
+
+    // =========================================================================
+    // Parallax for contact page CTA container text
+    // =========================================================================
+    const contactCtaContainer = document.querySelector('.contact-cta-container');
+    if (contactCtaContainer) {
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX - window.innerWidth / 2) * 0.008;
+            const y = (e.clientY - window.innerHeight / 2) * 0.008;
+            contactCtaContainer.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+        }, { passive: true });
+    }
+
 });
+
