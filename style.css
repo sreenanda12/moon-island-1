@@ -3683,6 +3683,10 @@ select.form-control option {
         height: 44px;
     }
 
+}
+
+/* Slide-in Mobile Navigation (max-width: 991px) */
+@media (max-width: 991px) {
     .menu-btn {
         display: flex;
         background: transparent;
@@ -3694,6 +3698,7 @@ select.form-control option {
         padding: 6px;
         border-radius: 4px;
         transition: var(--transition);
+        align-self: center;
     }
 
     .menu-btn span {
@@ -3709,38 +3714,52 @@ select.form-control option {
         box-shadow: 0 0 8px rgba(230, 184, 92, 0.6);
     }
 
-    .container {
-        padding: 0 1.5rem;
-    }
-
     .nav-links {
-        position: absolute;
-        top: calc(100% + 0.5rem);
-        left: 0;
+        position: fixed;
+        top: 0;
         right: 0;
-        width: 100%;
-        height: auto;
-        background: linear-gradient(135deg, rgba(17, 32, 61, 0.96) 0%, rgba(26, 47, 82, 0.96) 100%);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 16px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 
-                    0 0 25px rgba(165, 210, 255, 0.15);
+        width: 300px;
+        height: 100vh;
+        height: 100dvh;
+        background: rgba(7, 27, 57, 0.88);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-left: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.5);
         flex-direction: column;
-        justify-content: flex-start;
-        padding: 2rem 1.5rem;
-        gap: 1.5rem;
-        transform: translateY(-10px);
+        justify-content: center;
+        align-items: center;
+        padding: 6rem 2rem;
+        gap: 2.2rem;
+        z-index: 1000;
+        transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
     }
 
     .nav-links.active {
-        transform: translateY(0);
+        transform: translateX(0);
         opacity: 1;
         pointer-events: auto;
+    }
+
+    .nav-link {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem 1rem;
+        font-size: 1.15rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
     }
 
     .hero-premium {
@@ -8853,6 +8872,370 @@ section h1, section h2, section h3, section h4, section p, section span, section
         opacity: 0.15;
     }
 }
+
+
+/* ==========================================================================
+   Moon Island - Global Mobile Responsiveness Overrides
+   ========================================================================== */
+
+/* 1. Global Layout resets for Mobile (<= 768px) */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
+    .container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    section {
+        padding: 50px 0 !important; /* Spacing between sections centered at 40-60px */
+    }
+
+    /* Disable layout shifts & reduce parallax impact */
+    .parallax-bg, .bg-parallax, .desktop-moon-bg, .stars-container, .stars-layer {
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+/* 2. Global Typography Scaling (<= 768px and <= 480px) */
+@media (max-width: 768px) {
+    h1, .hero-title-luxury {
+        font-size: clamp(2.4rem, 8vw, 3rem) !important;
+        line-height: 1.1 !important;
+    }
+
+    h2, .section-title, .editorial-heading {
+        font-size: clamp(2rem, 6.5vw, 2.4rem) !important;
+        line-height: 1.2 !important;
+    }
+
+    h3, .card-front-title, .card-back-title {
+        font-size: clamp(1.4rem, 5vw, 1.8rem) !important;
+    }
+
+    p, .hero-tagline-luxury, .welcome-description, .editorial-description {
+        font-size: 16px !important;
+        line-height: 1.7 !important;
+    }
+
+    .btn, a.btn, button.btn {
+        min-height: 48px !important; /* touch target size */
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    h1, .hero-title-luxury {
+        font-size: 38px !important; /* Main Heading: 36-42px */
+    }
+
+    h2, .section-title, .editorial-heading {
+        font-size: 30px !important; /* Section Titles: 28-32px */
+    }
+
+    .hero-subtitle-luxury, .cultural-sub-heading {
+        font-size: 24px !important; /* Subheading: 24-28px */
+    }
+
+    p, .welcome-description, .editorial-description {
+        font-size: 16px !important; /* Body Text: 16-18px */
+    }
+
+    .btn, a.btn, button.btn {
+        font-size: 16px !important; /* Buttons: 16px */
+        width: 100% !important; /* Full width buttons on tiny mobile */
+    }
+}
+
+/* 3. Responsive Header & Hamburger Navigation below 992px */
+@media (max-width: 991px) {
+    .navbar {
+        padding: 0.8rem 1.5rem !important;
+        top: 0 !important;
+        width: 100% !important;
+        border-radius: 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .nav-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .brand-logo {
+        height: 48px !important;
+    }
+
+    .menu-btn {
+        display: flex !important;
+        z-index: 1001 !important;
+    }
+
+    .nav-links {
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        width: 290px !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        background: rgba(4, 9, 24, 0.92) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5) !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 5rem 1.5rem !important;
+        gap: 1.8rem !important;
+        transform: translateX(100%) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease !important;
+    }
+
+    .nav-links.active {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    .nav-link {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 12px 16px !important;
+        min-height: 48px !important;
+        font-size: 1.1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+    }
+
+    .nav-link::after {
+        display: none !important; /* Hide line highlights on mobile nav list */
+    }
+}
+
+/* 4. Hero Section Mobile Optimization (<= 768px) */
+@media (max-width: 768px) {
+    .hero-premium {
+        padding: 100px 0 50px !important;
+        min-height: auto !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .hero-split-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        min-height: auto !important;
+        gap: 2rem !important;
+    }
+
+    .hero-left {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .hero-content-premium {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .hero-label-luxury {
+        justify-content: center !important;
+        font-size: 0.75rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .hero-title-luxury {
+        text-align: center !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    .hero-subtitle-luxury {
+        text-align: center !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .hero-tagline-luxury {
+        text-align: center !important;
+        margin-bottom: 2rem !important;
+        max-width: 480px !important;
+    }
+
+    .hero-btns-wrapper {
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 290px !important;
+        gap: 1rem !important;
+        margin: 0 auto !important;
+    }
+
+    .hero-btns-wrapper a {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+
+    .hero-features-row {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        margin-top: 2rem !important;
+    }
+
+    .hero-features-row .feature-divider {
+        display: none !important;
+    }
+
+    .desktop-moon-bg {
+        width: 220px !important;
+        height: 220px !important;
+        top: 10% !important;
+        right: 5% !important;
+        opacity: 0.18 !important;
+    }
+}
+
+/* 5. General Layout Audits: Two-Column Section conversion (<= 768px) */
+@media (max-width: 768px) {
+    /* About, Services, Why Us grids vertical stacking & image-first order */
+    .welcome-grid-container {
+        display: flex !important;
+        flex-direction: column !important; /* Natural order has image column first */
+        gap: 2.5rem !important;
+        text-align: center !important;
+    }
+
+    .welcome-right-col {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .welcome-heading {
+        align-items: center !important;
+    }
+
+    .heading-welcome {
+        transform: rotate(0deg) !important;
+    }
+
+    /* Why Us / Why cards grid stacking */
+    .why-us-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .why-card {
+        padding: 24px 20px !important;
+        min-height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .why-card-top {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+
+    /* Packages grid stacking (ensure it defaults nicely) */
+    .packages-preview .experience-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .packages-preview .package-card {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Contact form elements styling */
+    .contact-form-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1.5rem 1rem !important;
+    }
+
+    .contact-form {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.2rem !important;
+    }
+
+    .form-group {
+        width: 100% !important;
+    }
+
+    .form-group input, 
+    .form-group textarea, 
+    .form-group select {
+        width: 100% !important;
+        min-height: 48px !important;
+        box-sizing: border-box !important;
+    }
+
+    .contact-submit-btn {
+        width: 100% !important;
+        min-height: 48px !important;
+        justify-content: center !important;
+    }
+
+    /* Footer layouts */
+    .footer-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2.5rem !important;
+        text-align: center !important;
+        align-items: center !important;
+    }
+
+    .footer-col {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .footer-social-icons {
+        justify-content: center !important;
+    }
+}
+
 
 
 
