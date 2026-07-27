@@ -50,7 +50,7 @@
                 <img src="assets/logo-icon.png" alt="Moon Island" class="brand-logo-icon">
                 <div class="logo-text-wrapper">
                     <span class="logo-title">MOON ISLAND</span>
-                    <span class="logo-tagline">A Hidden Island of Calm</span>
+                    <span class="logo-tagline">A hidden island of calm</span>
                 </div>
             </a>
 
@@ -703,20 +703,49 @@
     </main>
 
     <footer class="reveal premium-footer">
-        <!-- Drifting Moon Particles -->
-        <div class="footer-particles">
-            <div class="footer-particle fp-1"></div>
-            <div class="footer-particle fp-2"></div>
-            <div class="footer-particle fp-3"></div>
-            <div class="footer-particle fp-4"></div>
-            <div class="footer-particle fp-5"></div>
-            <div class="footer-particle fp-6"></div>
+        <!-- Cinematic Background System for Footer -->
+        <div class="footer-bg-wrapper">
+            <div class="footer-sky-gradient"></div>
+            <div class="footer-stars">
+                <!-- Tiny realistic twinkling stars -->
+                <div class="footer-star fs-1"></div>
+                <div class="footer-star fs-2"></div>
+                <div class="footer-star fs-3"></div>
+                <div class="footer-star fs-4"></div>
+                <div class="footer-star fs-5"></div>
+                <div class="footer-star fs-6"></div>
+                <div class="footer-star fs-7"></div>
+                <div class="footer-star fs-8"></div>
+                <div class="footer-star fs-9"></div>
+                <div class="footer-star fs-10"></div>
+                <div class="footer-star fs-11"></div>
+                <div class="footer-star fs-12"></div>
+            </div>
+            <!-- Giant cinematic moon with aura glow -->
+            <div class="footer-moon-glow"></div>
+            <div class="footer-moon"></div>
         </div>
 
         <div class="container">
+            <!-- Premium Newsletter Section -->
+            <div class="footer-newsletter">
+                <div class="newsletter-card glass-card">
+                    <h3 class="newsletter-heading">Stay Connected with Moon Island</h3>
+                    <p class="newsletter-desc">Get travel inspiration, exclusive offers, and updates delivered directly to your inbox.</p>
+                    <form class="newsletter-form" action="#" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                        <div class="newsletter-input-wrapper">
+                            <input type="email" placeholder="Your email address" class="newsletter-input" required aria-label="Email address for newsletter">
+                            <button type="submit" class="newsletter-btn">
+                                <span>Subscribe</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <!-- Main Footer Grid -->
             <div class="footer-grid">
-                <!-- Brand Column -->
+                <!-- Column 1: Brand -->
                 <div class="footer-col footer-col-brand">
                     <a href="index.html" class="logo footer-logo">
                         <img src="assets/logo-icon.png" alt="Moon Island Logo" class="brand-logo-icon">
@@ -725,113 +754,108 @@
                             <span class="logo-tagline">A Hidden Island of Calm</span>
                         </div>
                     </a>
-                    <p class="footer-brand-desc">A hidden island where calm waters, moonlit skies, and unforgettable journeys come together.</p>
+                    <p class="footer-brand-desc">
+                        Moon Island is a luxury backwater destination offering peaceful stays, authentic village experiences, kayaking, houseboat journeys, and unforgettable moonlit escapes in the heart of Kerala.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-icon social-btn" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-icon social-btn" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-icon social-btn" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/919961577599" target="_blank" rel="noopener" class="footer-social-icon social-btn" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Explore Column -->
+                <!-- Column 2: Quick Links -->
                 <div class="footer-col">
-                    <h4 class="footer-col-title">Explore</h4>
-                    <ul class="footer-links">
+                    <h4 class="footer-col-title">Quick Links</h4>
+                    <ul class="footer-links animate-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
+                        <li><a href="services.html">Experiences</a></li>
+                        <li><a href="services.html#packages">Packages</a></li>
+                        <li><a href="services.html#gallery">Gallery</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
 
-                <!-- Experiences Column -->
+                <!-- Column 3: Experiences -->
                 <div class="footer-col">
                     <h4 class="footer-col-title">Experiences</h4>
-                    <ul class="footer-links">
+                    <ul class="footer-links animate-links">
                         <li><a href="services.html">Kayaking</a></li>
-                        <li><a href="services.html">Shikkara Boating</a></li>
+                        <li><a href="services.html">Shikara Ride</a></li>
                         <li><a href="services.html">Village Walk</a></li>
-                        <li><a href="services.html">Boutique Homestay</a></li>
+                        <li><a href="services.html">Houseboat Stay</a></li>
+                        <li><a href="services.html">Sunrise Cruise</a></li>
+                        <li><a href="services.html">Night Camping</a></li>
+                        <li><a href="services.html">Luxury Stay</a></li>
                     </ul>
                 </div>
 
-                <!-- Activities Column -->
-                <div class="footer-col">
-                    <h4 class="footer-col-title">Activities</h4>
-                    <ul class="footer-links">
-                        <li><a href="services.html">Coir Making</a></li>
-                        <li><a href="services.html">Leaf Weaving</a></li>
-                        <li><a href="services.html">Toddy Tapping</a></li>
-                        <li><a href="services.html">Toddy Tasting</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Column -->
-                <div class="footer-col">
+                <!-- Column 4: Contact -->
+                <div class="footer-col footer-col-contact">
                     <h4 class="footer-col-title">Contact</h4>
                     <ul class="footer-contact-list">
                         <li class="footer-contact-item">
-                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                            </svg>
-                            <a href="tel:+919961577599">+91 9961 577 599</a>
+                            <span class="contact-icon-wrapper">📍</span>
+                            <span class="contact-text">
+                                <strong>Moon Island</strong><br>
+                                Backwaters<br>
+                                Alappuzha<br>
+                                Kerala
+                            </span>
                         </li>
                         <li class="footer-contact-item">
-                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                            <a href="mailto:mooonisland21@gmail.com">mooonisland21@gmail.com</a>
+                            <span class="contact-icon-wrapper">☎</span>
+                            <a href="tel:+919961577599" class="contact-link">+91 99615 77599</a>
                         </li>
                         <li class="footer-contact-item">
-                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <span>Pottotta, Kerala, India</span>
+                            <span class="contact-icon-wrapper">✉</span>
+                            <a href="mailto:moonisland21@gmail.com" class="contact-link">moonisland21@gmail.com</a>
                         </li>
                     </ul>
-                    <div class="footer-whatsapp">
-                        <a href="https://wa.me/919961577599" target="_blank" class="footer-whatsapp-btn">
-                            <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                            </svg>
-                            <span>WhatsApp Booking</span>
-                        </a>
+                    <div class="footer-working-hours">
+                        <span class="hours-title">Working Hours</span>
+                        <span class="hours-days">Mon–Sun</span>
+                        <span class="hours-time">9 AM – 8 PM</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Ripple Reflection -->
-        <div class="footer-ripple">
-            <svg viewBox="0 0 1440 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 10 C 360 20, 720 0, 1080 10 C 1260 15, 1380 5, 1440 10 L 1440 24 L 0 24 Z" fill="url(#footer-ripple-grad)" opacity="0.15" />
-                <path d="M0 15 C 360 5, 720 15, 1080 5 C 1260 0, 1380 10, 1440 15" stroke="rgba(165, 210, 255, 0.2)" stroke-width="1" fill="none" class="ripple-line-1" />
-                <path d="M0 8 C 400 0, 800 16, 1200 8 C 1320 4, 1400 12, 1440 8" stroke="rgba(216, 177, 90, 0.15)" stroke-width="0.8" fill="none" class="ripple-line-2" />
-                <defs>
-                    <linearGradient id="footer-ripple-grad" x1="720" y1="0" x2="720" y2="24" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#a5d2ff" stop-opacity="0.1"/>
-                        <stop offset="1" stop-color="#020617" stop-opacity="0.9"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-
         <!-- Bottom Bar -->
         <div class="footer-bottom">
             <div class="container footer-bottom-flex">
-                <p class="copyright">&copy; 2026 Moon Island. All rights reserved.</p>
-                <div class="footer-socials">
-                    <a href="#" target="_blank" class="footer-social-icon" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                    </a>
-                    <a href="#" target="_blank" class="footer-social-icon" aria-label="Facebook">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
-                    </a>
+                <div class="footer-bottom-left">
+                    <p class="copyright">&copy; 2026 Moon Island. All Rights Reserved.</p>
                 </div>
-                <a href="https://www.instagram.com/intellex.web?igsh=MWZyenU0bWc3M2RxOQ==" target="_blank" class="developer-link">meet the developers</a>
+                <div class="footer-bottom-links">
+                    <a href="#" class="bottom-link">Privacy Policy</a>
+                    <span class="link-separator">&bull;</span>
+                    <a href="#" class="bottom-link">Terms & Conditions</a>
+                </div>
+                <div class="footer-bottom-right">
+                    <p class="designed-by">Designed with ❤️ for unforgettable experiences.</p>
+                </div>
             </div>
         </div>
     </footer>
