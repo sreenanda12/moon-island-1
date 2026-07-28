@@ -8452,6 +8452,19 @@ section h1, section h2, section h3, section h4, section p, section span, section
     opacity: 0.7;
 }
 
+.featured-image-frame.v2 {
+    border: none;
+    border-radius: 16px;
+    aspect-ratio: 1.137;
+    filter: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(165, 210, 255, 0.15);
+}
+
+.featured-image-frame.v2::before,
+.featured-image-frame.v2::after {
+    display: none;
+}
+
 /* Glass Highlight Overlay */
 .glass-highlight {
     position: absolute;
