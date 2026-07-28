@@ -9579,22 +9579,60 @@ section h1, section h2, section h3, section h4, section p, section span, section
 /* 4. Hero Section Mobile Optimization (<= 768px) */
 @media (max-width: 768px) {
     .hero-premium {
-        padding: 100px 0 50px !important;
-        min-height: auto !important;
-        height: auto !important;
+        position: relative !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+        padding: 90px 0 30px !important; /* Top space for navigation bar, bottom padding */
+        margin: 0 !important;
+        border-radius: 0 !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    .hero-video-bg {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 1 !important;
+        overflow: hidden !important;
+    }
+
+    .video-bg {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: 0 !important;
     }
 
     .hero-split-container {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        justify-content: center !important;
+        justify-content: space-between !important;
         text-align: center !important;
-        min-height: auto !important;
-        gap: 2rem !important;
+        min-height: calc(100vh - 120px) !important; /* Center content within remaining viewport */
+        min-height: calc(100dvh - 120px) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 1.5rem !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        gap: 1.5rem !important;
+        box-sizing: border-box !important;
+        z-index: 10 !important;
     }
 
     .hero-left {
