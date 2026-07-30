@@ -334,7 +334,6 @@ img {
     position: absolute;
     background: #ffffff;
     border-radius: 50%;
-    will-change: opacity;
     animation: starTwinkleRandom 3.5s infinite ease-in-out;
 }
 
@@ -2200,18 +2199,142 @@ section {
 @media (max-width: 640px) {
     .why-us-grid {
         grid-template-columns: 1fr; /* Mobile: 1 column */
-        gap: 20px;
+        gap: 16px !important; /* Space between cards 16px */
     }
     .why-us-title {
         font-size: 38px;
     }
     .why-card {
-        padding: 24px;
-        height: auto;
-        min-height: 320px;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        height: 128px !important; /* Reduce each card height to 120-135px */
+        width: 93% !important; /* Card width should be 92-94% of the screen */
+        margin: 0 auto !important; /* Center the card horizontally */
+        border-radius: 22px !important; /* Border radius 22px */
+        padding: 18px !important; /* Internal padding 18px */
+        background: rgba(12, 18, 35, 0.68) !important; /* Maintain existing navy gradient/color */
+        backdrop-filter: blur(18px) !important;
+        -webkit-backdrop-filter: blur(18px) !important;
+        border: 1px solid rgba(212, 175, 55, 0.20) !important; /* Thin gold border with 20% opacity */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(37, 99, 235, 0.15) !important; /* Soft blue glow behind the cards */
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.35s ease,
+                    border-color 0.35s ease,
+                    background 0.35s ease !important; /* Transition: 0.35s */
+        overflow: hidden !important;
+        position: relative !important;
+        transform-style: flat !important;
+    }
+    .why-card-top-row {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 56px !important; /* Gold icon inside a 56x56px rounded square */
+        height: 56px !important;
+        min-width: 56px !important;
+        min-height: 56px !important;
+        flex-shrink: 0 !important;
+        position: static !important; /* So absolute card-number positions relative to why-card */
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 3 !important;
+    }
+    .why-icon-badge {
+        width: 56px !important;
+        height: 56px !important;
+        min-width: 56px !important;
+        min-height: 56px !important;
+        border-radius: 12px !important; /* smooth rounded square */
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(212, 175, 55, 0.35) !important;
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.15) !important; /* subtle glow */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.35s ease,
+                    border-color 0.35s ease,
+                    background-color 0.35s ease !important;
+        transform: none !important;
+    }
+    .why-icon-badge svg {
+        width: 24px !important;
+        height: 24px !important;
+        stroke: #D4AF37 !important;
+    }
+    .why-card-content {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        text-align: left !important;
+        padding-left: 2px !important;
+        position: relative !important;
+        z-index: 3 !important;
+        overflow: hidden !important;
     }
     .why-card h3 {
-        font-size: 28px;
+        font-size: 24px !important; /* Font Size: 24px */
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        margin: 0 0 8px 0 !important;
+        padding-bottom: 6px !important;
+        position: relative !important;
+        line-height: 1.2 !important;
+    }
+    .why-card h3::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 50px !important; /* Small gold underline below heading (50px) */
+        height: 2px !important;
+        background-color: #D4AF37 !important;
+    }
+    .why-card p {
+        font-size: 15px !important; /* Font Size: 15px */
+        color: #D7D7D7 !important; /* Light gray (#D7D7D7) */
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important; /* Maximum two lines */
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    .why-card .card-number {
+        position: absolute !important;
+        top: 12px !important;
+        right: 18px !important;
+        font-size: 48px !important; /* Font Size: 48px */
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        opacity: 0.07 !important; /* Very low opacity (6-8%) */
+        line-height: 1 !important;
+        z-index: 2 !important;
+        pointer-events: none !important;
+        user-select: none !important;
+    }
+    /* Hover / Touch Animation overrides */
+    .why-card:hover,
+    .why-card:active {
+        transform: translateY(-6px) !important; /* Lift card by 6px */
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(37, 99, 235, 0.25) !important; /* Slight blue shadow/glow */
+        border-color: rgba(212, 175, 55, 0.5) !important; /* Gold border becomes brighter */
+        background: rgba(22, 31, 56, 0.82) !important;
+    }
+    .why-card:hover .why-icon-badge,
+    .why-card:active .why-icon-badge {
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.5) !important; /* Icon glows softly */
+        transform: none !important; /* Prevent desktop vertical translation */
+        border-color: #D4AF37 !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+    .why-card:hover .card-number,
+    .why-card:active .card-number {
+        opacity: 0.07 !important; /* Maintain same opacity on hover/active on mobile */
     }
 }
 
@@ -10293,46 +10416,376 @@ section h1, section h2, section h3, section h4, section p, section span, section
     }
 }
 
+.footer-mobile-content {
+    display: none;
+}
+
 @media (max-width: 768px) {
-    .premium-footer {
-        padding-top: 60px;
+    /* Hide the original desktop container and bottom bar */
+    .premium-footer > .footer-desktop-content {
+        display: none !important;
     }
     
-    .premium-footer .footer-grid {
-        grid-template-columns: 1fr; /* Mobile: single column */
-        gap: 3.5rem;
-        padding: 0 20px;
+    .premium-footer .footer-mobile-content {
+        display: block !important;
+        background: linear-gradient(180deg, #07111F 0%, #0B1B35 100%) !important;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 30px 20px 20px 20px !important; /* 20px side padding */
+        box-sizing: border-box !important;
+        width: 100% !important;
     }
     
-    .premium-footer .footer-col-brand {
-        grid-column: span 1;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .premium-footer .footer-col {
-        align-items: center;
-        text-align: center;
-    }
-    
-    .premium-footer .footer-brand-desc {
-        max-width: 100%;
-    }
-    
-    .premium-footer .footer-whatsapp {
-        width: 100%;
-        max-width: 320px;
-    }
-    
-    .premium-footer .footer-whatsapp-btn {
-        width: 100%; /* WhatsApp button full width on mobile */
-    }
-    
-    .premium-footer .footer-bottom-flex {
+    .mobile-footer-container {
+        display: flex;
         flex-direction: column;
-        gap: 2rem;
-        padding: 0 20px;
+        align-items: center;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+    
+    /* 1. Logo Section */
+    .mobile-logo-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 18px; /* Spacing Bottom: 18px */
         text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: footerFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .mobile-footer-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        gap: 8px;
+    }
+    
+    .mobile-brand-logo-icon {
+        width: 110px !important; /* Reverted to 110px circular icon */
+        height: auto !important;
+    }
+    
+    .mobile-logo-text-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2px;
+    }
+    
+    .mobile-logo-text-wrapper .logo-title {
+        font-family: 'Bebas Neue', sans-serif !important;
+        font-size: 1.85rem !important; /* Premium fit */
+        letter-spacing: 4px !important;
+        color: #FFFFFF !important;
+        text-transform: uppercase !important;
+        margin: 0 !important;
+        line-height: 1.0 !important;
+    }
+    
+    .mobile-logo-text-wrapper .logo-tagline {
+        font-family: 'Selima', 'Alex Brush', 'Allura', cursive !important;
+        font-size: 1.35rem !important;
+        color: #C89A63 !important;
+        letter-spacing: 0.5px !important;
+        font-weight: 400 !important;
+        text-transform: none !important;
+        font-style: italic !important;
+        margin-top: 1px !important;
+    }
+    
+    /* 2. Description */
+    .mobile-footer-desc {
+        font-family: 'Outfit', sans-serif;
+        font-size: 15px; /* Font 15px */
+        line-height: 1.8; /* Line Height 1.8 */
+        color: rgba(255, 255, 255, 0.72) !important; /* Color rgba(255,255,255,0.72) */
+        text-align: center;
+        max-width: 280px; /* Maximum width 280px */
+        margin: 0 auto 24px auto !important; /* Centered, 24px section spacing */
+    }
+    
+    /* 3. Social Icons */
+    .mobile-social-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px; /* Gap 16px */
+        margin-bottom: 30px;
+    }
+    
+    .mobile-social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px; /* 48x48 circles */
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.04) !important; /* Glass background */
+        border: 1px solid rgba(216, 177, 90, 0.25) !important; /* Thin gold border */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    
+    .mobile-social-btn svg {
+        width: 20px;
+        height: 20px;
+        stroke: rgba(255, 255, 255, 0.8);
+        fill: none;
+        transition: stroke 0.35s ease, transform 0.35s ease;
+    }
+    
+    /* Hover / Touch State for Social Buttons */
+    .mobile-social-btn:hover,
+    .mobile-social-btn:active {
+        transform: scale(1.08) !important; /* Scale 1.08 */
+        background: rgba(216, 177, 90, 0.08) !important;
+        border-color: #D8B15A !important;
+        box-shadow: 0 0 15px rgba(165, 210, 255, 0.4) !important; /* Blue glow */
+        color: #D8B15A !important;
+    }
+    
+    .mobile-social-btn:hover svg,
+    .mobile-social-btn:active svg {
+        stroke: #D8B15A !important; /* Gold icon */
+        transform: rotate(8deg);
+    }
+    
+    /* 4. Navigation Grid (3 Columns) */
+    .mobile-nav-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+        width: 100%;
+        gap: 12px;
+        margin-bottom: 28px;
+    }
+    
+    .mobile-nav-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Everything centered */
+        text-align: center;
+    }
+    
+    .mobile-nav-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 18px !important; /* 18px */
+        font-weight: 700 !important; /* Bold */
+        color: #D8B15A !important; /* Gold */
+        margin: 0 0 16px 0 !important;
+    }
+    
+    .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px; /* Spacing between items 12px */
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .mobile-nav-links li a {
+        font-family: 'Outfit', sans-serif;
+        font-size: 15px !important; /* Items 15px */
+        color: #ffffff !important; /* White */
+        text-decoration: none;
+        opacity: 0.85;
+        position: relative;
+        display: inline-block;
+        transition: opacity 0.35s ease, color 0.35s ease;
+        padding: 2px 0;
+    }
+    
+    /* Tap Animation: Gold Underline */
+    .mobile-nav-links li a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1.5px;
+        bottom: -2px;
+        left: 0;
+        background-color: #D8B15A;
+        transform: scaleX(0);
+        transform-origin: bottom center;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .mobile-nav-links li a:active::after,
+    .mobile-nav-links li a:hover::after {
+        transform: scaleX(1); /* Gold underline on tap/hover */
+    }
+    
+    /* 5. Divider */
+    .mobile-footer-divider {
+        width: 100%;
+        height: 1px;
+        background-color: #D8B15A;
+        opacity: 0.40; /* 40% opacity */
+        margin: 28px 0 !important; /* Margin 28px */
+    }
+    
+    /* 6. Contact Section (3 Stacked Glass Cards) */
+    .mobile-contact-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 14px; /* Gap 14px */
+        margin-bottom: 28px;
+    }
+    
+    .mobile-contact-card {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.04) !important; /* Background rgba(255,255,255,0.04) */
+        border: 1px solid rgba(255, 255, 255, 0.06) !important;
+        border-radius: 18px !important; /* Border radius 18px */
+        padding: 18px !important; /* Padding 18px */
+        gap: 16px;
+        box-sizing: border-box;
+        text-align: left;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: footerSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .mobile-contact-card:nth-child(1) { animation-delay: 0.1s; }
+    .mobile-contact-card:nth-child(2) { animation-delay: 0.2s; }
+    .mobile-contact-card:nth-child(3) { animation-delay: 0.3s; }
+    
+    .mobile-contact-card .card-icon {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(216, 177, 90, 0.1);
+        border: 1px solid rgba(216, 177, 90, 0.2);
+    }
+    
+    .mobile-contact-card .card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .mobile-contact-card .card-label {
+        font-family: 'Outfit', sans-serif;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.45);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+    
+    .mobile-contact-card .card-value {
+        font-family: 'Outfit', sans-serif;
+        font-size: 15px;
+        color: #ffffff !important;
+        text-decoration: none;
+        transition: color 0.35s ease;
+        line-height: 1.4;
+    }
+    
+    .mobile-contact-card a.card-value:hover,
+    .mobile-contact-card a.card-value:active {
+        color: #D8B15A !important;
+    }
+    
+    /* 7. Copyright */
+    .mobile-copyright-section {
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .mobile-copyright {
+        font-family: 'Outfit', sans-serif;
+        font-size: 13px !important; /* Small text 13px */
+        color: rgba(255, 255, 255, 0.55) !important; /* Color rgba(255,255,255,.55) */
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    .mobile-developer-link-wrapper {
+        margin-top: 14px;
+        text-align: center;
+    }
+    
+    .mobile-developer-link {
+        font-family: 'Outfit', sans-serif;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        color: #D8B15A !important;
+        text-decoration: none;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        transition: opacity 0.35s ease, color 0.35s ease;
+        padding-bottom: 3px;
+    }
+    
+    .mobile-developer-link::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        background-color: #D8B15A;
+        transform: scaleX(0);
+        transform-origin: bottom center;
+        transition: transform 0.35s ease;
+    }
+    
+    .mobile-developer-link:active::after,
+    .mobile-developer-link:hover::after {
+        transform: scaleX(1);
+    }
+}
+
+/* Animations */
+@keyframes footerFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes footerSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Performance optimization: disable expensive SVG turbulence filters on mobile viewports */
+@media (max-width: 768px) {
+    .featured-image-frame,
+    .featured-image-frame::before,
+    .featured-image-frame::after,
+    .distressed-text {
+        filter: none !important;
     }
 }
 

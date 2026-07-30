@@ -46,15 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navbar) {
         const isHomePage = document.body.classList.contains('home-page');
         const heroSection = document.querySelector('.hero-section');
+        let ticked = false;
         const handleNavScroll = throttle(() => {
-            // Homepage transitions exactly when the bottom of the navbar hits the end of the hero section, other pages transition after 50px
-            const triggerHeight = isHomePage && heroSection 
-                ? (heroSection.offsetHeight - navbar.offsetHeight - 24) 
-                : 50;
-            navbar.classList.toggle('scrolled', window.scrollY > triggerHeight);
-        }, 100);
+            if (!ticked) {
+                requestAnimationFrame(() => {
+                    const triggerHeight = isHomePage && heroSection 
+                        ? (heroSection.offsetHeight - navbar.offsetHeight - 24) 
+                        : 50;
+                    navbar.classList.toggle('scrolled', window.scrollY > triggerHeight);
+                    ticked = false;
+                });
+                ticked = true;
+            }
+        }, 80);
         window.addEventListener('scroll', handleNavScroll, { passive: true });
-        // Run once on load to establish initial state
         handleNavScroll();
     }
 
@@ -93,6 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const interactiveCards = document.querySelectorAll('.why-card, .about-exp-card, .timeline-node');
     if (interactiveCards.length > 0) {
         interactiveCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                if (window.innerWidth < 768) return;
+                card.style.willChange = 'transform';
+            });
+
             card.addEventListener('mousemove', (e) => {
                 if (window.innerWidth < 768) return;
                 const rect = card.getBoundingClientRect();
@@ -110,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             card.addEventListener('mouseleave', () => {
                 card.style.transform = '';
+                card.style.willChange = '';
             });
         });
     }
@@ -127,18 +138,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let targetScale = 1.15; // Increased default size by 15% (1.15 base scale)
     let currentScale = 1.15;
 
+    const isMobileDevice = window.innerWidth < 1024 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
     const updateScrollState = () => {
+        if (isMobileDevice) return;
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
-        targetScale = 1.15 + scrollPercent * 0.28; // Obvious zoom range 1.15 to 1.43 (1.25x zoom scale)
+        targetScale = 1.15 + scrollPercent * 0.28; // Obvious zoom range 1.15 to 1.43
     };
-    window.addEventListener('scroll', updateScrollState, { passive: true });
-    updateScrollState();
 
-    if (window.innerWidth >= 1024) {
+    if (!isMobileDevice) {
+        window.addEventListener('scroll', updateScrollState, { passive: true });
+        updateScrollState();
+
         document.addEventListener('mousemove', (e) => {
-            // Magnetic cursor displacement range -40px to 40px (80px total range)
+            // Magnetic cursor displacement range -40px to 40px
             targetX = ((e.clientX / window.innerWidth) - 0.5) * 80;
             targetY = ((e.clientY / window.innerHeight) - 0.5) * 80;
         }, { passive: true });
@@ -159,7 +174,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let spaceDust = null;
     let fogLayer = null;
 
+    let rafId = null;
+    let isTabVisible = true;
+
     const updateBackgroundParallax = () => {
+        if (isMobileDevice || !isTabVisible) {
+            rafId = null;
+            return;
+        }
+
         // LERP mouse tracking coordinates
         currentX += (targetX - currentX) * ease;
         currentY += (targetY - currentY) * ease;
@@ -215,9 +238,20 @@ document.addEventListener('DOMContentLoaded', () => {
             fogLayer.style.transform = `translate3d(${currentX * -0.3}px, ${currentY * -0.3}px, 0)`;
         }
 
-        requestAnimationFrame(updateBackgroundParallax);
+        rafId = requestAnimationFrame(updateBackgroundParallax);
     };
-    requestAnimationFrame(updateBackgroundParallax);
+
+    // Toggle animations based on tab visibility
+    document.addEventListener('visibilitychange', () => {
+        isTabVisible = (document.visibilityState === 'visible');
+        if (isTabVisible && !rafId && !isMobileDevice) {
+            rafId = requestAnimationFrame(updateBackgroundParallax);
+        }
+    });
+
+    if (!isMobileDevice) {
+        rafId = requestAnimationFrame(updateBackgroundParallax);
+    }
 
     // =========================================================================
     // 6. Hero Background Video — robust autoplay
@@ -442,11 +476,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 4. Generate 320 stars distributed across 5 separate layers (twinkling and drifting)
+        // 4. Generate stars distributed across 5 separate layers (twinkling and drifting)
         const starsContainer = document.querySelector('.stars-container');
         if (starsContainer) {
             starsContainer.innerHTML = ''; // clear static layers
             
+            const starCount = isMobileDevice ? 80 : 320; // Drastically reduce mobile nodes
             const layers = [];
             for (let l = 1; l <= 5; l++) {
                 const wrap = document.createElement('div');
@@ -459,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             const frags = Array.from({ length: 5 }, () => document.createDocumentFragment());
-            for (let i = 0; i < 320; i++) {
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
@@ -486,9 +521,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 4b. Generate glowing star clusters (4 clusters)
+        // 4b. Generate glowing star clusters (4 clusters on desktop, 1 on mobile)
         if (starsContainer) {
-            for (let i = 0; i < 4; i++) {
+            const clusterCount = isMobileDevice ? 1 : 4;
+            for (let i = 0; i < clusterCount; i++) {
                 const cluster = document.createElement('div');
                 cluster.className = 'star-cluster';
                 cluster.style.top = `${15 + Math.random() * 50}%`;
@@ -497,13 +533,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 5. Generate slowly flying comets (4 comets)
+        // 5. Generate slowly flying comets (4 comets on desktop, 0 on mobile)
         if (!document.querySelector('.stars-layer-comets')) {
             const cometsLayer = document.createElement('div');
             cometsLayer.className = 'stars-layer-comets';
             starsContainer.appendChild(cometsLayer);
             
-            for (let i = 0; i < 4; i++) {
+            const cometCount = isMobileDevice ? 0 : 4;
+            for (let i = 0; i < cometCount; i++) {
                 const comet = document.createElement('div');
                 comet.className = 'flying-comet';
                 comet.style.top = `${10 + Math.random() * 40}%`;
@@ -512,14 +549,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 6. Generate 20 fireflies floating around
+        // 6. Generate fireflies floating around (20 on desktop, 6 on mobile)
         if (!document.querySelector('.fireflies-container')) {
             const firefliesContainer = document.createElement('div');
             firefliesContainer.className = 'fireflies-container';
             bgWrapper.appendChild(firefliesContainer);
             
+            const fireflyCount = isMobileDevice ? 6 : 20;
             const frag = document.createDocumentFragment();
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < fireflyCount; i++) {
                 const ff = document.createElement('div');
                 ff.className = 'firefly';
                 ff.style.top = `${20 + Math.random() * 70}%`;
@@ -531,14 +569,15 @@ document.addEventListener('DOMContentLoaded', () => {
             firefliesContainer.appendChild(frag);
         }
 
-        // 7. Generate 30 cosmic dust particles
+        // 7. Generate cosmic dust particles (30 on desktop, 10 on mobile)
         if (!document.querySelector('.space-dust-container')) {
             const dustContainer = document.createElement('div');
             dustContainer.className = 'space-dust-container';
             bgWrapper.appendChild(dustContainer);
             
+            const dustCount = isMobileDevice ? 10 : 30;
             const frag = document.createDocumentFragment();
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < dustCount; i++) {
                 const dust = document.createElement('div');
                 dust.className = 'space-dust-particle';
                 const size = Math.random() * 3 + 1.5;
@@ -566,10 +605,9 @@ document.addEventListener('DOMContentLoaded', () => {
             bgWrapper.appendChild(fog);
         }
 
-
-
-        // 10. Cursor Trailer Emitter
+        // 10. Cursor Trailer Emitter (Disable on touch screens)
         const createCursorInteractions = () => {
+            if (isMobileDevice) return;
             let lastSpawn = 0;
             
             document.addEventListener('mousemove', (e) => {
@@ -577,17 +615,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // 1. Trail Particles
                 if (now - lastSpawn > 35) {
-                    lastSpawn = now;
-                    const particle = document.createElement('div');
-                    particle.className = 'cursor-trail-particle';
-                    particle.style.left = `${e.clientX}px`;
-                    particle.style.top = `${e.clientY}px`;
-                    
-                    const offset = (Math.random() - 0.5) * 12;
-                    particle.style.setProperty('--dx', `${offset}px`);
-                    
-                    bgWrapper.appendChild(particle);
-                    setTimeout(() => particle.remove(), 800);
+                     lastSpawn = now;
+                     const particle = document.createElement('div');
+                     particle.className = 'cursor-trail-particle';
+                     particle.style.left = `${e.clientX}px`;
+                     particle.style.top = `${e.clientY}px`;
+                     
+                     const offset = (Math.random() - 0.5) * 12;
+                     particle.style.setProperty('--dx', `${offset}px`);
+                     
+                     bgWrapper.appendChild(particle);
+                     setTimeout(() => particle.remove(), 800);
                 }
             }, { passive: true });
         };
@@ -620,11 +658,39 @@ document.addEventListener('DOMContentLoaded', () => {
             let currentFollowY = 0;
             
             const ease = 0.08; // Smooth LERP easing factor
+            let localRafId = null;
+            
+            const animateTilt = () => {
+                currentTiltX += (targetTiltX - currentTiltX) * ease;
+                currentTiltY += (targetTiltY - currentTiltY) * ease;
+                currentFollowX += (targetFollowX - currentFollowX) * ease;
+                currentFollowY += (targetFollowY - currentFollowY) * ease;
+                
+                if (window.innerWidth > 991) {
+                    const scale = isHovered ? 1.08 : 1.0;
+                    const lift = isHovered ? -15 : 0;
+                    tiltEl.style.transform = `perspective(1000px) rotateX(${currentTiltX}deg) rotateY(${currentTiltY}deg) translate3d(${currentFollowX}px, ${lift + currentFollowY}px, 0) scale(${scale})`;
+                } else {
+                    tiltEl.style.transform = '';
+                }
+                
+                // Stop the RAF loop if the tilt settles to rest
+                const diff = Math.abs(targetTiltX - currentTiltX) + 
+                             Math.abs(targetTiltY - currentTiltY) + 
+                             Math.abs(targetFollowX - currentFollowX) + 
+                             Math.abs(targetFollowY - currentFollowY);
+                             
+                if (isHovered || diff > 0.01) {
+                    localRafId = requestAnimationFrame(animateTilt);
+                } else {
+                    localRafId = null;
+                    tiltEl.style.willChange = '';
+                }
+            };
             
             col.addEventListener('mousemove', (e) => {
                 if (window.innerWidth <= 991) return; // Skip on mobile
                 
-                isHovered = true;
                 const rect = container.getBoundingClientRect();
                 const containerCenterX = rect.left + rect.width / 2;
                 const containerCenterY = rect.top + rect.height / 2;
@@ -651,11 +717,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetTiltX = 0;
                     targetTiltY = 0;
                 }
+                
+                if (!localRafId) {
+                    tiltEl.style.willChange = 'transform';
+                    localRafId = requestAnimationFrame(animateTilt);
+                }
             });
             
             col.addEventListener('mouseenter', () => {
                 if (window.innerWidth <= 991) return;
                 isHovered = true;
+                if (!localRafId) {
+                    tiltEl.style.willChange = 'transform';
+                    localRafId = requestAnimationFrame(animateTilt);
+                }
             });
             
             col.addEventListener('mouseleave', () => {
@@ -664,29 +739,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetTiltY = 0;
                 targetFollowX = 0;
                 targetFollowY = 0;
-            });
-            
-            const animateTilt = () => {
-                currentTiltX += (targetTiltX - currentTiltX) * ease;
-                currentTiltY += (targetTiltY - currentTiltY) * ease;
-                currentFollowX += (targetFollowX - currentFollowX) * ease;
-                currentFollowY += (targetFollowY - currentFollowY) * ease;
-                
-                if (window.innerWidth > 991) {
-                    const scale = isHovered ? 1.08 : 1.0;
-                    const lift = isHovered ? -15 : 0;
-                    tiltEl.style.transform = `perspective(1000px) rotateX(${currentTiltX}deg) rotateY(${currentTiltY}deg) translate3d(${currentFollowX}px, ${lift + currentFollowY}px, 0) scale(${scale})`;
-                } else {
-                    tiltEl.style.transform = '';
+                if (!localRafId) {
+                    tiltEl.style.willChange = 'transform';
+                    localRafId = requestAnimationFrame(animateTilt);
                 }
-                
-                requestAnimationFrame(animateTilt);
-            };
-            
-            animateTilt();
+            });
         });
         
         // ─── B. Scroll Parallax Animation ────────────────────────────────────
+        let scrollTicked = false;
         const updateScrollParallax = () => {
             if (window.innerWidth <= 991) {
                 parallaxTargets.forEach(target => {
@@ -707,7 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Normalize progress from -1 (entering bottom) to 1 (leaving top)
                     const scrollProgress = (viewportCenter - elementCenter) / (viewportHeight / 2 + rect.height / 2);
                     
-                    // Range: 40px to 80px translation. Let's use 50px (total range 100px)
+                    // Range: 50px translation
                     const yOffset = -scrollProgress * 50; 
                     
                     target.style.transform = `translate3d(0, ${yOffset}px, 0)`;
@@ -716,10 +777,16 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         window.addEventListener('scroll', () => {
-            requestAnimationFrame(updateScrollParallax);
+            if (!scrollTicked) {
+                requestAnimationFrame(() => {
+                    updateScrollParallax();
+                    scrollTicked = false;
+                });
+                scrollTicked = true;
+            }
         }, { passive: true });
         
-        requestAnimationFrame(updateScrollParallax);
+        updateScrollParallax();
     }
 
     // =========================================================================
@@ -731,14 +798,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroKayakBgImg = document.querySelector('.hero-kayak-bg-img');
 
     if (heroKayakContent) {
+        let storyTicked = false;
         window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            if (scrolled < 900) {
-                heroKayakContent.style.transform = `translate3d(0, ${scrolled * 0.25}px, 0)`;
-                heroKayakContent.style.opacity = Math.max(0, 1 - (scrolled / 600));
-                if (heroKayakBgImg) {
-                    heroKayakBgImg.style.transform = `scale(${1 + (scrolled * 0.00015)}) translate3d(0, ${scrolled * 0.08}px, 0)`;
-                }
+            if (!storyTicked) {
+                requestAnimationFrame(() => {
+                    const scrolled = window.scrollY;
+                    if (scrolled < 900) {
+                        heroKayakContent.style.transform = `translate3d(0, ${scrolled * 0.25}px, 0)`;
+                        heroKayakContent.style.opacity = Math.max(0, 1 - (scrolled / 600));
+                        if (heroKayakBgImg) {
+                            heroKayakBgImg.style.transform = `scale(${1 + (scrolled * 0.00015)}) translate3d(0, ${scrolled * 0.08}px, 0)`;
+                        }
+                    }
+                    storyTicked = false;
+                });
+                storyTicked = true;
             }
         }, { passive: true });
     }
@@ -778,12 +852,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Parallax for services page custom illustration
     // =========================================================================
     const parallaxIllustration = document.querySelector('.cta-parallax-illustration');
-    if (parallaxIllustration) {
+    if (parallaxIllustration && !isMobileDevice) {
         document.addEventListener('mousemove', (e) => {
             const x = (e.clientX - window.innerWidth / 2) * 0.025;
             const y = (e.clientY - window.innerHeight / 2) * 0.025;
-            parallaxIllustration.style.setProperty('--px', `${x.toFixed(1)}px`);
-            parallaxIllustration.style.setProperty('--py', `${y.toFixed(1)}px`);
+            requestAnimationFrame(() => {
+                parallaxIllustration.style.setProperty('--px', `${x.toFixed(1)}px`);
+                parallaxIllustration.style.setProperty('--py', `${y.toFixed(1)}px`);
+            });
         }, { passive: true });
     }
 
@@ -791,11 +867,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Parallax for contact page CTA container text
     // =========================================================================
     const contactCtaContainer = document.querySelector('.contact-cta-container');
-    if (contactCtaContainer) {
+    if (contactCtaContainer && !isMobileDevice) {
         document.addEventListener('mousemove', (e) => {
             const x = (e.clientX - window.innerWidth / 2) * 0.008;
             const y = (e.clientY - window.innerHeight / 2) * 0.008;
-            contactCtaContainer.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+            requestAnimationFrame(() => {
+                contactCtaContainer.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+            });
         }, { passive: true });
     }
 
