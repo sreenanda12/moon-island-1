@@ -817,35 +817,80 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // ─── C. Animated Statistics Counter ──────────────────────────────────────
-    const counterElements = document.querySelectorAll('.counter-val');
-    if (counterElements.length > 0) {
-        const counterObserver = new IntersectionObserver((entries) => {
+    // ─── Enable iOS active state styling immediately on touch ───────────────
+    document.addEventListener('touchstart', () => {}, { passive: true });
+
+    // ─── C. About Story Page Statistics Section Animation ──────────────────────
+    const statsGrid = document.querySelector('.story-stats-grid');
+    if (statsGrid) {
+        const statCards = statsGrid.querySelectorAll('.story-stat-card');
+        
+        const runStatsAnimations = () => {
+            statCards.forEach((card, index) => {
+                const numHighlight = card.querySelector('.stat-num-highlight');
+                if (!numHighlight) return;
+
+                const text = numHighlight.textContent.trim();
+                const numMatch = text.match(/\d+/);
+                if (!numMatch) return;
+
+                const targetVal = parseInt(numMatch[0], 10);
+                const suffix = text.replace(numMatch[0], ''); // Extracts '+' or '/7'
+
+                // Initially reset count representation to '0' + suffix
+                numHighlight.textContent = '0' + suffix;
+
+                const staggerDelay = index * 150; // Stagger: 0.15s
+
+                // 1. Staggered Card Entrance Animation (Fade Up + Scale)
+                setTimeout(() => {
+                    card.classList.add('card-enter');
+
+                    // Set to interactive transition speeds after entrance completes (0.7s)
+                    setTimeout(() => {
+                        card.classList.add('interactive');
+                    }, 700);
+
+                    // 2. Smooth Counter Animation: 1.8 seconds, ease-out cubic
+                    let startTimestamp = null;
+                    const duration = 1800; // ms
+                    
+                    const step = (timestamp) => {
+                        if (!startTimestamp) startTimestamp = timestamp;
+                        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                        // Cubic ease-out curve
+                        const easeProgress = 1 - Math.pow(1 - progress, 3);
+                        const currentValue = Math.floor(easeProgress * targetVal);
+                        
+                        numHighlight.textContent = currentValue + suffix;
+                        
+                        if (progress < 1) {
+                            window.requestAnimationFrame(step);
+                        } else {
+                            numHighlight.textContent = targetVal + suffix;
+                        }
+                    };
+                    window.requestAnimationFrame(step);
+                }, staggerDelay);
+
+                // 3. Text Animation (Fade Up) exactly 0.2s after the counter finishes
+                // Total delay = staggerDelay + counterDuration (1800ms) + textDelay (200ms)
+                setTimeout(() => {
+                    card.classList.add('text-enter');
+                }, staggerDelay + 1800 + 200);
+            });
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const targetNum = parseInt(el.getAttribute('data-target'), 10);
-                    let currentNum = 0;
-                    const duration = 1800; // ms
-                    const stepTime = Math.max(Math.floor(duration / (targetNum || 1)), 20);
-                    const increment = Math.max(Math.ceil(targetNum / (duration / stepTime)), 1);
-                    
-                    const timer = setInterval(() => {
-                        currentNum += increment;
-                        if (currentNum >= targetNum) {
-                            el.textContent = targetNum;
-                            clearInterval(timer);
-                        } else {
-                            el.textContent = currentNum;
-                        }
-                    }, stepTime);
-
-                    counterObserver.unobserve(el);
+                    runStatsAnimations();
+                    statsObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.12 });
 
-        counterElements.forEach(el => counterObserver.observe(el));
+        statsObserver.observe(statsGrid);
     }
 
     // =========================================================================
@@ -875,6 +920,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 contactCtaContainer.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
             });
         }, { passive: true });
+    }
+
+    // =========================================================================
+    // 4. Premium Loader Overlay Fade Out (Homepage Only)
+    // =========================================================================
+    const loader = document.getElementById('premium-loader');
+    if (loader) {
+        const minDisplayTime = 2200; // ms
+        const startTime = Date.now();
+
+        const fadeLoader = () => {
+            const elapsedTime = Date.now() - startTime;
+            const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+                setTimeout(() => {
+                    loader.remove(); // Clean up overlay DOM element
+                }, 500); // matches CSS transition duration
+            }, remainingTime);
+        };
+
+        if (document.readyState === 'complete') {
+            fadeLoader();
+        } else {
+            window.addEventListener('load', fadeLoader);
+        }
     }
 
 });
