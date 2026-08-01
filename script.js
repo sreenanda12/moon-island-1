@@ -481,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (starsContainer) {
             starsContainer.innerHTML = ''; // clear static layers
             
-            const starCount = isMobileDevice ? 80 : 320; // Drastically reduce mobile nodes
+            const starCount = isMobileDevice ? 20 : 75; // Optimized DOM element count
             const layers = [];
             for (let l = 1; l <= 5; l++) {
                 const wrap = document.createElement('div');
@@ -521,9 +521,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 4b. Generate glowing star clusters (4 clusters on desktop, 1 on mobile)
+        // 4b. Generate glowing star clusters (2 clusters on desktop, 1 on mobile)
         if (starsContainer) {
-            const clusterCount = isMobileDevice ? 1 : 4;
+            const clusterCount = isMobileDevice ? 1 : 2;
             for (let i = 0; i < clusterCount; i++) {
                 const cluster = document.createElement('div');
                 cluster.className = 'star-cluster';
@@ -533,29 +533,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 5. Generate slowly flying comets (4 comets on desktop, 0 on mobile)
+        // 5. Generate slowly flying comets (2 comets on desktop, 0 on mobile)
         if (!document.querySelector('.stars-layer-comets')) {
             const cometsLayer = document.createElement('div');
             cometsLayer.className = 'stars-layer-comets';
             starsContainer.appendChild(cometsLayer);
             
-            const cometCount = isMobileDevice ? 0 : 4;
+            const cometCount = isMobileDevice ? 0 : 2;
             for (let i = 0; i < cometCount; i++) {
                 const comet = document.createElement('div');
                 comet.className = 'flying-comet';
                 comet.style.top = `${10 + Math.random() * 40}%`;
-                comet.style.animationDelay = `${i * 9}s`;
+                comet.style.animationDelay = `${i * 12}s`;
                 cometsLayer.appendChild(comet);
             }
         }
 
-        // 6. Generate fireflies floating around (20 on desktop, 6 on mobile)
+        // 6. Generate fireflies floating around (8 on desktop, 3 on mobile)
         if (!document.querySelector('.fireflies-container')) {
             const firefliesContainer = document.createElement('div');
             firefliesContainer.className = 'fireflies-container';
             bgWrapper.appendChild(firefliesContainer);
             
-            const fireflyCount = isMobileDevice ? 6 : 20;
+            const fireflyCount = isMobileDevice ? 3 : 8;
             const frag = document.createDocumentFragment();
             for (let i = 0; i < fireflyCount; i++) {
                 const ff = document.createElement('div');
@@ -569,13 +569,13 @@ document.addEventListener('DOMContentLoaded', () => {
             firefliesContainer.appendChild(frag);
         }
 
-        // 7. Generate cosmic dust particles (30 on desktop, 10 on mobile)
+        // 7. Generate cosmic dust particles (10 on desktop, 4 on mobile)
         if (!document.querySelector('.space-dust-container')) {
             const dustContainer = document.createElement('div');
             dustContainer.className = 'space-dust-container';
             bgWrapper.appendChild(dustContainer);
             
-            const dustCount = isMobileDevice ? 10 : 30;
+            const dustCount = isMobileDevice ? 4 : 10;
             const frag = document.createDocumentFragment();
             for (let i = 0; i < dustCount; i++) {
                 const dust = document.createElement('div');
@@ -605,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bgWrapper.appendChild(fog);
         }
 
-        // 10. Cursor Trailer Emitter (Disable on touch screens)
+        // 10. Cursor Trailer Emitter (Throttled for high GPU performance)
         const createCursorInteractions = () => {
             if (isMobileDevice) return;
             let lastSpawn = 0;
@@ -613,8 +613,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.addEventListener('mousemove', (e) => {
                 const now = performance.now();
                 
-                // 1. Trail Particles
-                if (now - lastSpawn > 35) {
+                // Trail Particles throttled to 80ms to prevent DOM clogging
+                if (now - lastSpawn > 80) {
                      lastSpawn = now;
                      const particle = document.createElement('div');
                      particle.className = 'cursor-trail-particle';
@@ -625,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
                      particle.style.setProperty('--dx', `${offset}px`);
                      
                      bgWrapper.appendChild(particle);
-                     setTimeout(() => particle.remove(), 800);
+                     setTimeout(() => particle.remove(), 400); // 400ms lifetime reduces nodes by 50%
                 }
             }, { passive: true });
         };
@@ -746,32 +746,50 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
         
-        // ─── B. Scroll Parallax Animation ────────────────────────────────────
+        // ─── B. Scroll Parallax Animation (Cached positions to prevent layout thrashing) ───
         let scrollTicked = false;
+        let cachedTargets = [];
+        
+        const cacheParallaxPositions = () => {
+            cachedTargets = Array.from(parallaxTargets).map(target => {
+                const rect = target.getBoundingClientRect();
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                return {
+                    el: target,
+                    top: rect.top + scrollTop,
+                    height: rect.height
+                };
+            });
+        };
+        
+        // Cache initially and on resize
+        cacheParallaxPositions();
+        window.addEventListener('resize', debounce(cacheParallaxPositions, 200));
+        
         const updateScrollParallax = () => {
             if (window.innerWidth <= 991) {
-                parallaxTargets.forEach(target => {
-                    target.style.transform = '';
+                cachedTargets.forEach(item => {
+                    item.el.style.transform = '';
                 });
                 return;
             }
             
             const viewportHeight = window.innerHeight;
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const viewportCenter = scrollTop + viewportHeight / 2;
             
-            parallaxTargets.forEach(target => {
-                const rect = target.getBoundingClientRect();
+            cachedTargets.forEach(item => {
+                const elementCenter = item.top + item.height / 2;
                 
-                if (rect.bottom > -100 && rect.top < viewportHeight + 100) {
-                    const elementCenter = rect.top + rect.height / 2;
-                    const viewportCenter = viewportHeight / 2;
-                    
+                // Check if element is in viewport with a 100px buffer
+                if (item.top + item.height > scrollTop - 100 && item.top < scrollTop + viewportHeight + 100) {
                     // Normalize progress from -1 (entering bottom) to 1 (leaving top)
-                    const scrollProgress = (viewportCenter - elementCenter) / (viewportHeight / 2 + rect.height / 2);
+                    const scrollProgress = (viewportCenter - elementCenter) / (viewportHeight / 2 + item.height / 2);
                     
                     // Range: 50px translation
                     const yOffset = -scrollProgress * 50; 
                     
-                    target.style.transform = `translate3d(0, ${yOffset}px, 0)`;
+                    item.el.style.transform = `translate3d(0, ${yOffset.toFixed(1)}px, 0)`;
                 }
             });
         };
