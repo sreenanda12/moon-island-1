@@ -21,7 +21,7 @@ img{max-width:100%;display:block;}
 .desktop-moon-bg{display:none;}
 @media (min-width:1025px){.desktop-moon-bg{display:block;position:absolute;top:-4vh;left:-4vw;width:108vw;height:108dvh;z-index:1;will-change:transform;transform-style:preserve-3d;}
 }
-.desktop-moon-inner{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('assets/moon_bg.png');background-size:cover;background-position:right center;background-repeat:no-repeat;z-index:1;}
+.desktop-moon-inner{position:absolute;top:0;left:0;width:100%;height:100%;background-image:url('assets/moon_bg.webp');background-size:cover;background-position:right center;background-repeat:no-repeat;z-index:1;}
 .moon-aura-pulse{position:absolute;top:0;right:0;width:100%;height:100%;background:radial-gradient(circle at 92% 50%, rgba(165, 210, 255, 0.45) 0%, rgba(165, 210, 255, 0.12) 35%, transparent 65%);z-index:0;pointer-events:none;mix-blend-mode:screen;animation:breathingGlow 3s infinite ease-in-out alternate;}
 .moon-edge-scatter{position:absolute;top:0;right:0;width:100%;height:100%;background:radial-gradient(circle at 92% 50%, rgba(165, 210, 255, 0.4) 0%, rgba(165, 210, 255, 0) 42%);z-index:2;pointer-events:none;mix-blend-mode:screen;animation:edgeLightScatter 6s infinite ease-in-out alternate;}
 .moon-light-rays{position:absolute;top:0;right:0;width:100%;height:100%;background:repeating-conic-gradient(from 0deg at 92% 50%, transparent 0%, rgba(165, 210, 255, 0.04) 2%, transparent 4%, transparent 10%);mix-blend-mode:screen;z-index:1;pointer-events:none;animation:rotateRays 120s infinite linear;}
@@ -36,7 +36,7 @@ to{transform:rotate(360deg);}
 }
 .mobile-moon-bg{display:none;}
 @media (max-width:1024px){.mobile-moon-bg{display:block;position:absolute;top:-4vh;left:-4vw;width:108vw;height:108dvh;z-index:1;overflow:hidden;}
-.mobile-moon-inner{width:100%;height:100%;background-image:url('assets/moon_bg.png');background-size:cover;background-position:82% center;background-repeat:no-repeat;animation:mobileMoonFloatSimple 8s infinite ease-in-out alternate;z-index:1;}
+.mobile-moon-inner{width:100%;height:100%;background-image:url('assets/moon_bg.webp');background-size:cover;background-position:82% center;background-repeat:no-repeat;animation:mobileMoonFloatSimple 8s infinite ease-in-out alternate;z-index:1;}
 .mobile-moon-aura{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 82% 50%, rgba(165, 210, 255, 0.2) 0%, rgba(165, 210, 255, 0.05) 30%, transparent 60%);z-index:0;pointer-events:none;mix-blend-mode:screen;animation:breathingGlow 3s infinite ease-in-out alternate;}
 }
 @keyframes mobileMoonFloatSimple{0%{transform:translateY(0);}
@@ -581,7 +581,7 @@ select.form-control option{background:var(--bg-navy);color:white;}
 .fs-11{width:1px;height:1px;top:80%;left:85%;animation:footerStarTwinkle 3s infinite ease-in-out;animation-delay:1.2s;}
 .fs-12{width:2px;height:2px;top:50%;left:95%;animation:footerStarTwinkle 4.8s infinite ease-in-out;animation-delay:2s;}
 .footer-moon-glow{position:absolute;right:-250px;bottom:-150px;width:700px;height:700px;background:radial-gradient(circle, rgba(165, 210, 255, 0.28) 0%, rgba(165, 210, 255, 0.05) 50%, transparent 72%);z-index:2;pointer-events:none;filter:blur(25px);}
-.footer-moon{position:absolute;right:-220px;bottom:-120px;width:580px;height:580px;background-image:url('assets/moon_bg.png');background-size:contain;background-repeat:no-repeat;z-index:3;pointer-events:none;opacity:0.85;filter:drop-shadow(0 0 50px rgba(165, 210, 255, 0.35));animation:footerMoonGlow 8s ease-in-out infinite alternate;}
+.footer-moon{position:absolute;right:-220px;bottom:-120px;width:580px;height:580px;background-image:url('assets/moon_bg.webp');background-size:contain;background-repeat:no-repeat;z-index:3;pointer-events:none;opacity:0.85;filter:drop-shadow(0 0 50px rgba(165, 210, 255, 0.35));animation:footerMoonGlow 8s ease-in-out infinite alternate;}
 @keyframes footerMoonGlow{0%{transform:scale(1) rotate(0deg);filter:drop-shadow(0 0 40px rgba(165, 210, 255, 0.3));}
 100%{transform:scale(1.02) rotate(2deg);filter:drop-shadow(0 0 60px rgba(165, 210, 255, 0.45));}
 }
@@ -665,7 +665,7 @@ select.form-control option{background:var(--bg-navy);color:white;}
 .footer-grid{grid-template-columns:1fr;gap:3rem;}
 .footer-brand-desc{max-width:100%;}
 }
-.page-header{padding:10rem 0 5rem;background:linear-gradient(to bottom, rgba(2, 6, 23, 0.8), var(--bg-navy)), url('assets/experience.png');background-size:cover;background-position:center;text-align:center;position:relative;overflow:hidden;}
+.page-header{padding:10rem 0 5rem;background:linear-gradient(to bottom, rgba(2, 6, 23, 0.8), var(--bg-navy)), url('assets/experience.webp');background-size:cover;background-position:center;text-align:center;position:relative;overflow:hidden;}
 .hero-title{font-size:clamp(2.8rem, 6vw, 4.2rem);line-height:1.15;color:var(--text-white);margin-top:0.5rem;}
 .scroll-indicator, .scroll-indicator-premium{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);z-index:10;opacity:0.7;}
 .mouse, .mouse-premium{width:24px;height:40px;border:2px solid var(--glass-border);border-radius:20px;display:flex;justify-content:center;padding-top:8px;}
@@ -1409,11 +1409,11 @@ to{transform:rotate(360deg);}
 50%{transform:translate(25px, -25px);opacity:0.5;}
 100%{transform:translate(0, 0);opacity:0.15;}
 }
-.welcome-section-moon{position:absolute;top:-20px;right:-250px;width:750px;height:750px;background-image:url('assets/moon_bg.png');background-size:contain;background-repeat:no-repeat;opacity:0.16;z-index:1;pointer-events:none;filter:drop-shadow(0 0 80px rgba(165, 210, 255, 0.45));animation:welcomeMoonFloat 16s infinite ease-in-out alternate;}
+.welcome-section-moon{position:absolute;top:-20px;right:-250px;width:750px;height:750px;background-image:url('assets/moon_bg.webp');background-size:contain;background-repeat:no-repeat;opacity:0.16;z-index:1;pointer-events:none;filter:drop-shadow(0 0 80px rgba(165, 210, 255, 0.45));animation:welcomeMoonFloat 16s infinite ease-in-out alternate;}
 @keyframes welcomeMoonFloat{0%{transform:translateY(0) rotate(0deg);}
 100%{transform:translateY(25px) rotate(1.5deg);}
 }
-.kayak-paddler-bg{position:absolute;bottom:0;right:0;width:60vw;height:60%;max-height:500px;max-width:700px;background-image:url('assets/bg-kayak.png');background-position:right bottom;background-repeat:no-repeat;background-size:200% 200%;pointer-events:none;z-index:1;opacity:0.75;mix-blend-mode:lighten;-webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%), linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%), linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);mask-composite:intersect;}
+.kayak-paddler-bg{position:absolute;bottom:0;right:0;width:60vw;height:60%;max-height:500px;max-width:700px;background-image:url('assets/bg-kayak.webp');background-position:right bottom;background-repeat:no-repeat;background-size:200% 200%;pointer-events:none;z-index:1;opacity:0.75;mix-blend-mode:lighten;-webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%), linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%), linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);mask-composite:intersect;}
 .welcome-grid-container{display:flex;align-items:center;justify-content:space-between;gap:5.5rem;position:relative;z-index:3;}
 .welcome-left-col{flex:0 0 45%;max-width:45%;display:flex;justify-content:center;align-items:center;}
 .welcome-right-col{flex:0 0 55%;max-width:55%;position:relative;}
@@ -1491,7 +1491,7 @@ to{opacity:1;transform:translateY(0);}
 .editorial-culture-section{position:relative;min-height:900px;display:flex;align-items:center;overflow:hidden;background:radial-gradient(circle at 80% 30%, #0B2D58 0%, #071B39 45%, #041225 100%);padding:7rem 0;z-index:2;}
 .editorial-bg-stars{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)), radial-gradient(1.5px 1.5px at 150px 80px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 300px 200px, rgba(255,255,255,0.7), rgba(0,0,0,0)), radial-gradient(2px 2px at 450px 350px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 600px 120px, rgba(255,255,255,0.5), rgba(0,0,0,0)), radial-gradient(1.5px 1.5px at 750px 420px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 900px 250px, rgba(255,255,255,0.8), rgba(0,0,0,0)), radial-gradient(1px 1px at 1100px 180px, #ffffff, rgba(0,0,0,0));background-size:1200px 600px;background-repeat:repeat;opacity:0.25;animation:starsTwinkleGentle 4s ease-in-out infinite alternate;pointer-events:none;z-index:0;}
 .editorial-bg-nebula{position:absolute;top:15%;right:-10%;width:60vw;height:70vh;background:radial-gradient(circle at 80% 40%, rgba(11, 45, 88, 0.45) 0%, rgba(7, 27, 57, 0.15) 50%, transparent 80%);filter:blur(50px);pointer-events:none;z-index:0;}
-.editorial-bg-moon{position:absolute;top:12%;right:5%;width:520px;height:520px;background-image:url('assets/moon_bg.png');background-size:cover;background-position:center;opacity:0.22;filter:blur(1.5px) drop-shadow(0 0 40px rgba(165, 210, 255, 0.25));pointer-events:none;z-index:1;animation:editorialMoonFloat 22s ease-in-out infinite alternate;}
+.editorial-bg-moon{position:absolute;top:12%;right:5%;width:520px;height:520px;background-image:url('assets/moon_bg.webp');background-size:cover;background-position:center;opacity:0.22;filter:blur(1.5px) drop-shadow(0 0 40px rgba(165, 210, 255, 0.25));pointer-events:none;z-index:1;animation:editorialMoonFloat 22s ease-in-out infinite alternate;}
 .editorial-bg-reflection{position:absolute;bottom:0;right:-15%;width:600px;height:180px;background:radial-gradient(ellipse at center, rgba(165, 210, 255, 0.08) 0%, transparent 70%);filter:blur(10px);pointer-events:none;z-index:1;}
 .editorial-bg-mist{position:absolute;bottom:0;left:0;width:100%;height:120px;background:linear-gradient(to top, #041225 0%, transparent 100%);pointer-events:none;z-index:1;}
 @keyframes starsTwinkleGentle{0%{opacity:0.18;}
@@ -2096,9 +2096,63 @@ to{opacity:1;transform:translateY(0);}
         display: none !important;
     }
     .hero-video-bg {
-        background-image: url('assets/hero_night_v2.jpg') !important;
+        background-image: url('assets/hero_night_v2.webp') !important;
         background-size: cover !important;
         background-position: center center !important;
         background-repeat: no-repeat !important;
     }
 }
+
+/* Home Page specific overlay and background cleanups */
+.home-page .welcome-section-moon,
+.home-page .moon-aura-pulse,
+.home-page .moon-light-rays,
+.home-page .moon-edge-scatter,
+.home-page .mobile-moon-aura {
+    display: none !important;
+}
+
+.home-page .welcome-about-section {
+    background: transparent !important;
+}
+
+.home-page .hero-video-overlay {
+    display: none !important;
+}
+
+/* Performance and GPU Optimization overrides */
+.desktop-moon-bg,
+.stars-layer-1-wrap,
+.stars-layer-2-wrap,
+.stars-layer-3-wrap,
+.stars-layer-4-wrap,
+.stars-layer-5-wrap,
+.stars-layer-1-inner,
+.stars-layer-2-inner,
+.stars-layer-3-inner,
+.stars-layer-4-inner,
+.stars-layer-5-inner,
+.nebula-mist,
+.clouds-container,
+.space-dust-container,
+.fog-layer,
+.flying-comet,
+.firefly,
+.welcome-particle {
+    will-change: transform;
+}
+
+.welcome-section-moon,
+.editorial-bg-moon,
+.footer-moon {
+    will-change: transform, filter;
+}
+
+/* Disable competing CSS floatMoon animation to prevent transform property conflict in JS */
+.desktop-moon-bg {
+    animation: none !important;
+}
+
+
+
+
