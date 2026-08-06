@@ -945,25 +945,61 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     const loader = document.getElementById('premium-loader');
     if (loader) {
-        const minDisplayTime = 2200; // ms
+        const minimumTime = 2500; // ms minimum to display the brand intro
         const startTime = Date.now();
+        let targetProgress = 0;
+        let currentProgress = 0;
+        let isLoaded = false;
 
-        const fadeLoader = () => {
+        // Smoothly interpolate the progress value at 60 FPS
+        const animateLoader = () => {
+            // Lerp towards the target progress
+            currentProgress += (targetProgress - currentProgress) * 0.055;
+            
+            // Apply the custom property for translation in CSS
+            loader.style.setProperty('--progress', currentProgress.toFixed(4));
+
+            // Once the page has loaded and the boat has sailed close to 100%
+            if (isLoaded && currentProgress >= 0.985) {
+                loader.style.setProperty('--progress', '1');
+                setTimeout(() => {
+                    loader.classList.add('fade-out');
+                    setTimeout(() => {
+                        loader.remove(); // Clean up overlay DOM element
+                    }, 700); // matches style.css transition duration + headroom
+                }, 150);
+                return;
+            }
+            requestAnimationFrame(animateLoader);
+        };
+        requestAnimationFrame(animateLoader);
+
+        // Gradually increment targetProgress up to 90% while page finishes loading
+        const progressInterval = setInterval(() => {
+            if (!isLoaded) {
+                if (targetProgress < 0.9) {
+                    // Slow down the increment as it approaches 90% for a natural loading curve
+                    targetProgress += (0.9 - targetProgress) * 0.12 + 0.015;
+                    if (targetProgress > 0.9) targetProgress = 0.9;
+                }
+            }
+        }, 120);
+
+        const completeLoading = () => {
             const elapsedTime = Date.now() - startTime;
-            const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+            const delay = Math.max(0, minimumTime - elapsedTime);
 
             setTimeout(() => {
-                loader.classList.add('fade-out');
-                setTimeout(() => {
-                    loader.remove(); // Clean up overlay DOM element
-                }, 500); // matches CSS transition duration
-            }, remainingTime);
+                isLoaded = true;
+                targetProgress = 1;
+                clearInterval(progressInterval);
+            }, delay);
         };
 
         if (document.readyState === 'complete') {
-            fadeLoader();
+            completeLoading();
         } else {
-            window.addEventListener('load', fadeLoader);
+            window.addEventListener('load', completeLoading);
         }
     }
 

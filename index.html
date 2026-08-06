@@ -23,7 +23,7 @@
         rel="stylesheet">
     <link href="https://db.onlinewebfonts.com/c/cf73d2680fe0e0d00f78c7295e3617e0?family=Selima" rel="stylesheet"
         type="text/css" />
-    <link rel="stylesheet" href="./style.css?v=16.2">
+    <link rel="stylesheet" href="./style.css?v=17.0">
 </head>
 
 <body class="home-page">
@@ -37,6 +37,69 @@
                     <span class="logo-tagline">A hidden island of calm</span>
                 </div>
             </div>
+        </div>
+        
+        <!-- Premium Boating-Inspired Loading Animation -->
+        <div class="boat-loader-container">
+            <div class="water-track">
+                <!-- Water Waves SVG -->
+                <svg class="waterline-svg" viewBox="0 0 320 20" preserveAspectRatio="none">
+                    <path class="wave-path wave-path-1" d="M 0,10 Q 40,7 80,10 T 160,10 T 240,10 T 320,10" fill="none" stroke="rgba(165, 210, 255, 0.35)" stroke-width="1.5"/>
+                    <path class="wave-path wave-path-2" d="M 0,12 Q 40,15 80,12 T 160,12 T 240,12 T 320,12" fill="none" stroke="rgba(165, 210, 255, 0.18)" stroke-width="1"/>
+                </svg>
+                
+                <!-- Water Shimmer Highlights -->
+                <div class="water-shimmers">
+                    <div class="shimmer shimmer-1"></div>
+                    <div class="shimmer shimmer-2"></div>
+                    <div class="shimmer shimmer-3"></div>
+                </div>
+                
+                <!-- Boat Wrapper -->
+                <div class="boat-wrapper">
+                    <!-- Trailing Wake Ripples -->
+                    <div class="boat-wake">
+                        <div class="wake-ripple ripple-1"></div>
+                        <div class="wake-ripple ripple-2"></div>
+                        <div class="wake-ripple ripple-3"></div>
+                    </div>
+                    
+                    <!-- Wooden Canoe SVG -->
+                    <svg class="boat-svg" viewBox="0 0 100 30">
+                        <defs>
+                            <!-- Wooden gradient -->
+                            <linearGradient id="boatWood" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#3d1d0c" />
+                                <stop offset="50%" stop-color="#80441c" />
+                                <stop offset="100%" stop-color="#3d1d0c" />
+                            </linearGradient>
+                            <linearGradient id="boatHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#c89a63" />
+                                <stop offset="100%" stop-color="#3d1d0c" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Boat Reflection in SVG (distorted dynamically via CSS keyframes) -->
+                        <g class="boat-reflection">
+                            <path d="M 8,10 C 20,24 80,24 92,10 C 85,16 15,16 8,10 Z" fill="#1e3a5f" />
+                        </g>
+                        
+                        <!-- Boat Hull -->
+                        <path d="M 8,10 C 20,24 80,24 92,10 C 85,16 15,16 8,10 Z" fill="url(#boatWood)" />
+                        <!-- Golden Gunwale Trim -->
+                        <path d="M 8,10 C 20,13 80,13 92,10 C 85,11.5 15,11.5 8,10 Z" fill="url(#boatHighlight)" opacity="0.85" />
+                        <!-- Wooden seats inside -->
+                        <rect x="25" y="11" width="3" height="3" fill="#2d1306" rx="0.5" />
+                        <rect x="48" y="11.5" width="4" height="3" fill="#2d1306" rx="0.5" />
+                        <rect x="72" y="11" width="3" height="3" fill="#2d1306" rx="0.5" />
+                        <!-- Small oar resting -->
+                        <line x1="32" y1="12" x2="68" y2="7.5" stroke="#c89a63" stroke-width="0.8" stroke-linecap="round" opacity="0.9" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Loading Text -->
+            <div class="boat-loader-text">Sailing to Moon Island...</div>
         </div>
     </div>
 
@@ -675,9 +738,6 @@
         <section class="editorial-culture-section reveal" id="cultural-immersion">
             <!-- Background Elements -->
             <div class="editorial-bg-stars"></div>
-            <div class="editorial-bg-nebula"></div>
-            <div class="editorial-bg-moon"></div>
-            <div class="editorial-bg-reflection"></div>
             <div class="editorial-bg-mist"></div>
 
             <div class="container">

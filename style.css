@@ -151,6 +151,225 @@ to{transform:translate3d(-3%, 4%, 0);}
 70%{opacity:0.85;transform:translate(-50%, -50%) scale(1.0);}
 100%{opacity:0.9;transform:translate(-50%, -50%) scale(1.0);}
 }
+/* Boat Loader Container & Styling */
+.boat-loader-container {
+    position: absolute;
+    top: calc(50% + 90px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 320px;
+    opacity: 0;
+    animation: boatLoaderReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+@keyframes boatLoaderReveal {
+    0% { opacity: 0; transform: translate(-50%, 15px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.water-track {
+    position: relative;
+    width: 100%;
+    height: 35px;
+    border-bottom: 1.5px solid rgba(165, 210, 255, 0.15);
+    overflow: visible;
+}
+
+.waterline-svg {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    pointer-events: none;
+}
+
+/* Wave Shimmer & Ripple Paths */
+.wave-path {
+    stroke-linecap: round;
+}
+
+.wave-path-1 {
+    animation: backwaterWave1 8s linear infinite;
+}
+
+.wave-path-2 {
+    animation: backwaterWave2 6s linear infinite;
+}
+
+@keyframes backwaterWave1 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-15px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes backwaterWave2 {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(15px); }
+    100% { transform: translateX(0); }
+}
+
+/* Water Shimmers (glowing specs) */
+.water-shimmers {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    pointer-events: none;
+}
+
+.shimmer {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: #a5d2ff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #a5d2ff, 0 0 12px rgba(165, 210, 255, 0.8);
+    opacity: 0;
+    animation: shimmerPulse 3.5s infinite ease-in-out;
+}
+
+.shimmer-1 { left: 15%; animation-delay: 0.2s; }
+.shimmer-2 { left: 52%; animation-delay: 1.6s; }
+.shimmer-3 { left: 82%; animation-delay: 0.9s; }
+
+@keyframes shimmerPulse {
+    0%, 100% { opacity: 0; transform: scale(0.6); }
+    50% { opacity: 0.75; transform: scale(1.3); }
+}
+
+/* Boat & Movement */
+.boat-wrapper {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 54px; /* Boat size */
+    height: 20px;
+    /* Move boat horizontally based on JS progress variable */
+    transform: translateX(calc(var(--progress, 0) * (320px - 54px)));
+    will-change: transform;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* Boat bobbing up & down, and pitching */
+.boat-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    animation: boatBobbing 2.6s ease-in-out infinite;
+    transform-origin: 50% 70%;
+}
+
+@keyframes boatBobbing {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-1.2px) rotate(-0.5deg);
+    }
+    50% {
+        transform: translateY(0.4px) rotate(0.6deg);
+    }
+    75% {
+        transform: translateY(-0.8px) rotate(-0.3deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+/* Trailing Wake ripples behind boat */
+.boat-wake {
+    position: absolute;
+    right: 75%;
+    bottom: 2px;
+    display: flex;
+    gap: 3px;
+    pointer-events: none;
+}
+
+.wake-ripple {
+    width: 6px;
+    height: 2px;
+    background: rgba(165, 210, 255, 0.4);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: wakeRippleAnim 1.5s infinite linear;
+    filter: blur(0.5px);
+}
+
+.ripple-1 { animation-delay: 0s; }
+.ripple-2 { animation-delay: 0.5s; }
+.ripple-3 { animation-delay: 1.0s; }
+
+@keyframes wakeRippleAnim {
+    0% {
+        transform: scale(0.5) translateX(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2.2) translateX(-15px);
+        opacity: 0;
+    }
+}
+
+/* Boat reflection on water */
+.boat-reflection {
+    transform: scaleY(-0.7) translateY(4px);
+    transform-origin: 50% 12px;
+    opacity: 0.18;
+    filter: blur(1px);
+    animation: reflectionWaveDistort 2.6s ease-in-out infinite;
+}
+
+@keyframes reflectionWaveDistort {
+    0%, 100% {
+        transform: scaleY(-0.7) translateY(4px) skewX(0deg);
+        opacity: 0.18;
+    }
+    50% {
+        transform: scaleY(-0.65) translateY(4.5px) skewX(2deg);
+        opacity: 0.13;
+    }
+}
+
+/* Typography for Loading Text */
+.boat-loader-text {
+    font-family: 'Outfit', 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0.7;
+    animation: textPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 0.85; }
+}
+
+/* Adjustments for smaller screen widths */
+@media (max-width: 480px) {
+    .boat-loader-container {
+        width: 260px;
+    }
+    .boat-wrapper {
+        transform: translateX(calc(var(--progress, 0) * (260px - 54px)));
+    }
+}
+
 .menu-btn{display:none;}
 .nav-links{display:flex;gap:45px;align-items:center;margin:0;padding:0;list-style:none;}
 .nav-link{font-family:'Montserrat', sans-serif;font-size:0.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;position:relative;color:#FFFFFF;padding:6px 0;text-decoration:none;transition:color 275ms ease-in-out, transform 275ms ease-in-out;display:inline-block;}
@@ -1488,22 +1707,15 @@ to{opacity:1;transform:translateY(0);}
 .btn-discover-story{width:100%;max-width:320px;justify-content:center;}
 .kayak-paddler-bg{width:100%;height:40%;opacity:0.45;}
 }
-.editorial-culture-section{position:relative;min-height:900px;display:flex;align-items:center;overflow:hidden;background:radial-gradient(circle at 80% 30%, #0B2D58 0%, #071B39 45%, #041225 100%);padding:7rem 0;z-index:2;}
+.editorial-culture-section{position:relative;min-height:900px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(180deg, #041225 0%, #020617 100%);padding:7rem 0;z-index:2;}
 .editorial-bg-stars{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)), radial-gradient(1.5px 1.5px at 150px 80px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 300px 200px, rgba(255,255,255,0.7), rgba(0,0,0,0)), radial-gradient(2px 2px at 450px 350px, #ffffff, rgba(0,0,0,0)), radial-gradient(1px 1px at 600px 120px, rgba(255,255,255,0.5), rgba(0,0,0,0)), radial-gradient(1.5px 1.5px at 750px 420px, #ffffff, rgba(0,0,0,0)), radial-gradient(2px 2px at 900px 250px, rgba(255,255,255,0.8), rgba(0,0,0,0)), radial-gradient(1px 1px at 1100px 180px, #ffffff, rgba(0,0,0,0));background-size:1200px 600px;background-repeat:repeat;opacity:0.25;animation:starsTwinkleGentle 4s ease-in-out infinite alternate;pointer-events:none;z-index:0;}
-.editorial-bg-nebula{position:absolute;top:15%;right:-10%;width:60vw;height:70vh;background:radial-gradient(circle at 80% 40%, rgba(11, 45, 88, 0.45) 0%, rgba(7, 27, 57, 0.15) 50%, transparent 80%);filter:blur(50px);pointer-events:none;z-index:0;}
-.editorial-bg-moon{position:absolute;top:12%;right:5%;width:520px;height:520px;background-image:url('assets/moon_bg.webp');background-size:cover;background-position:center;opacity:0.22;filter:blur(1.5px) drop-shadow(0 0 40px rgba(165, 210, 255, 0.25));pointer-events:none;z-index:1;animation:editorialMoonFloat 22s ease-in-out infinite alternate;}
-.editorial-bg-reflection{position:absolute;bottom:0;right:-15%;width:600px;height:180px;background:radial-gradient(ellipse at center, rgba(165, 210, 255, 0.08) 0%, transparent 70%);filter:blur(10px);pointer-events:none;z-index:1;}
 .editorial-bg-mist{position:absolute;bottom:0;left:0;width:100%;height:120px;background:linear-gradient(to top, #041225 0%, transparent 100%);pointer-events:none;z-index:1;}
 @keyframes starsTwinkleGentle{0%{opacity:0.18;}
 100%{opacity:0.35;}
 }
-@keyframes editorialMoonFloat{0%{transform:translate3d(0, 0, 0) rotate(0deg);}
-50%{transform:translate3d(-10px, 15px, 0) rotate(1.5deg);}
-100%{transform:translate3d(8px, -10px, 0) rotate(-1deg);}
-}
-.editorial-grid{display:flex;align-items:center;justify-content:space-between;gap:7rem;position:relative;z-index:3;}
+.editorial-grid{display:flex;align-items:center;justify-content:space-between;gap:3.5rem;position:relative;z-index:3;}
 .editorial-left-col{flex:0 0 45%;max-width:45%;}
-.editorial-right-col{flex:0 0 50%;max-width:50%;display:flex;flex-direction:column;align-items:flex-start;}
+.editorial-right-col{flex:0 0 52%;max-width:52%;display:flex;flex-direction:column;align-items:flex-start;}
 .editorial-badge-wrapper{display:inline-flex;flex-direction:column;align-items:flex-start;margin-bottom:1.8rem;}
 .editorial-badge-text{font-family:'Poppins', 'Outfit', sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:3.5px;color:#D8A552;text-transform:uppercase;display:flex;align-items:center;gap:0.6rem;}
 .badge-wave-icon{margin-bottom:2px;}
@@ -1518,9 +1730,9 @@ to{opacity:1;transform:translateY(0);}
 .exp-card-icon{color:#D8A552;flex-shrink:0;transition:transform 0.4s ease;}
 .exp-card:hover .exp-card-icon{transform:scale(1.15) rotate(5deg);}
 .exp-card-label{font-family:'Poppins', 'Outfit', sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:1.2px;color:#ffffff;text-transform:uppercase;}
-.editorial-image-frame-wrapper{position:relative;width:100%;padding:1.5rem;margin-bottom:1.5rem;}
-.editorial-image-frame{position:relative;width:100%;aspect-ratio:0.92;border-radius:32px;border:1.5px solid rgba(216, 165, 82, 0.95);box-shadow:0 30px 70px rgba(0, 0, 0, 0.65), 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 35px rgba(216, 165, 82, 0.12);overflow:visible;transform:rotate(2.5deg);transition:transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);background:transparent;}
-.editorial-image-frame-wrapper:hover .editorial-image-frame{transform:rotate(2.5deg) scale(1.015);}
+.editorial-image-frame-wrapper{position:relative;width:100%;padding:0;margin-bottom:1.5rem;}
+.editorial-image-frame{position:relative;width:100%;aspect-ratio:0.95;border-radius:24px;border:1.5px solid rgba(216, 165, 82, 0.7);box-shadow:0 25px 60px rgba(0, 0, 0, 0.55), 0 10px 25px rgba(0, 0, 0, 0.25);overflow:visible;transform:none;transition:transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);background:transparent;}
+.editorial-image-frame-wrapper:hover .editorial-image-frame{transform:scale(1.01);box-shadow:0 35px 75px rgba(0, 0, 0, 0.65), 0 15px 35px rgba(0, 0, 0, 0.3);}
 .editorial-image-inner{position:relative;width:100%;height:100%;border-radius:30.5px;overflow:hidden;will-change:transform;transform:translateZ(0);}
 .editorial-featured-image{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:0;transition:transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);}
 .editorial-image-frame-wrapper:hover .editorial-featured-image{transform:scale(1.05);}
@@ -1543,7 +1755,6 @@ to{opacity:1;transform:translateY(0);}
 .experience-buttons-grid{gap:1rem;}
 .exp-card{padding:1.1rem 0.9rem;}
 .exp-card-label{font-size:0.76rem;}
-.editorial-bg-moon{width:380px;height:380px;}
 }
 @media (max-width:768px){.editorial-grid{flex-direction:column;text-align:left;gap:5rem;}
 .editorial-left-col, .editorial-right-col{flex:0 0 100%;max-width:100%;}
@@ -1555,7 +1766,6 @@ to{opacity:1;transform:translateY(0);}
 .paper-sticky-note{right:-10px;bottom:-10px;padding:1.2rem;max-width:190px;}
 .sticky-note-text{font-size:1.25rem;}
 .editorial-location-caption{padding-left:1rem;}
-.editorial-bg-moon{top:5%;right:50%;transform:translateX(50%);width:300px;height:300px;opacity:0.15;}
 }
 @media (max-width:768px){html, body{overflow-x:hidden !important;width:100% !important;}
 .container{padding-left:20px !important;padding-right:20px !important;width:100% !important;max-width:100% !important;box-sizing:border-box !important;}
