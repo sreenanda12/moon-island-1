@@ -101,11 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
             card.addEventListener('mouseenter', () => {
                 if (window.innerWidth < 768) return;
                 card.style.willChange = 'transform';
+                card._cachedRect = card.getBoundingClientRect();
             });
 
             card.addEventListener('mousemove', (e) => {
                 if (window.innerWidth < 768) return;
-                const rect = card.getBoundingClientRect();
+                const rect = card._cachedRect || card.getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top + rect.height / 2;
                 const mouseX = e.clientX - centerX;
@@ -115,12 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rotateX = (-mouseY / (rect.height / 2)) * 2;
                 const rotateY = (mouseX / (rect.width / 2)) * 2;
 
-                card.style.transform = `perspective(1000px) translateY(-10px) scale(1.02) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+                requestAnimationFrame(() => {
+                    card.style.transform = `perspective(1000px) translateY(-10px) scale(1.02) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+                });
             });
 
             card.addEventListener('mouseleave', () => {
                 card.style.transform = '';
                 card.style.willChange = '';
+                card._cachedRect = null;
             });
         });
     }
@@ -259,18 +263,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroVideo = document.querySelector('.hero-bg-video');
     if (heroVideo) {
         heroVideo.muted = true;
-        const tryPlay = () => heroVideo.play().catch(() => {});
-        tryPlay();
-        heroVideo.addEventListener('canplaythrough', tryPlay, { once: true });
+        heroVideo.volume = 0;
 
-        // Pause video when it scrolls out of view to save CPU
+        const tryPlay = () => {
+            if (heroVideo.paused && heroVideo.readyState >= 2) {
+                heroVideo.play().catch(() => {});
+            }
+        };
+
+        // Trigger load immediately (needed when preload=auto)
+        if (heroVideo.readyState === 0) {
+            heroVideo.load();
+        }
+
+        // Play as soon as enough data is available
+        heroVideo.addEventListener('canplay', tryPlay, { once: true });
+
+        // Recovery for stall or waiting events (network hiccup)
+        const handleStall = () => {
+            setTimeout(() => {
+                if (heroVideo.paused) {
+                    heroVideo.play().catch(() => {});
+                }
+            }, 300);
+        };
+        heroVideo.addEventListener('stalled', handleStall);
+        heroVideo.addEventListener('waiting', handleStall);
+
+        // Also try immediately in case readyState is already high
+        tryPlay();
+
+        // Pause/play video when scrolled in/out of viewport
         if ('IntersectionObserver' in window) {
             const videoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) { heroVideo.play().catch(() => {}); }
-                    else { heroVideo.pause(); }
+                    if (entry.isIntersecting) { 
+                        if (heroVideo.paused) {
+                            heroVideo.play().catch(() => {}); 
+                        }
+                    } else { 
+                        if (!heroVideo.paused) {
+                            heroVideo.pause(); 
+                        }
+                    }
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.0 });
             videoObserver.observe(heroVideo);
         }
     }

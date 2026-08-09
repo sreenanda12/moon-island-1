@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- Prevent browser caching of this page -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Moon Island | Luxury Backwater Experiences Kerala</title>
     <meta name="description"
         content="Discover Moon Island - A premium luxury tourism destination in Kerala. Experience kayaking, shikkara rides, and boutique stays in a serene moonlit atmosphere.">
@@ -15,7 +19,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="assets/logo-icon.webp">
-    <link rel="preload" as="video" href="hero-section-new.mp4" type="video/mp4">
 
     <!-- Consolidated Typography -->
     <link
@@ -23,7 +26,7 @@
         rel="stylesheet">
     <link href="https://db.onlinewebfonts.com/c/cf73d2680fe0e0d00f78c7295e3617e0?family=Selima" rel="stylesheet"
         type="text/css" />
-    <link rel="stylesheet" href="./style.css?v=17.0">
+    <link rel="stylesheet" href="./style.css?v=23.0">
 </head>
 
 <body class="home-page">
@@ -169,8 +172,10 @@
         <!-- Hero Section -->
         <section class="hero-premium hero-section">
             <div class="hero-video-bg">
-                <video class="hero-bg-video video-bg" autoplay muted loop playsinline preload="auto"
-                    poster="assets/hero_night_v2.webp">
+                <video class="hero-bg-video video-bg" autoplay muted loop playsinline webkit-playsinline preload="auto"
+                    poster="assets/hero_night_v2.webp"
+                    disablePictureInPicture
+                    disableRemotePlayback>
                     <source src="hero-section-new.mp4" type="video/mp4">
                 </video>
                 <!-- Cinematic combined gradient overlay -->
@@ -1045,6 +1050,25 @@
     </main>
 
     <footer class="reveal premium-footer">
+        <!-- Premium Footer Atmospheric Background Layers -->
+        <div class="footer-bg-decor">
+            <div class="footer-stars-field"></div>
+            <div class="footer-ambient-glow"></div>
+            <div class="footer-boat-silhouette">
+                <svg viewBox="0 0 120 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5,25 C25,25 35,32 60,32 C85,32 95,25 115,25 C100,28 85,30 60,30 C35,30 20,28 5,25 Z"/>
+                    <path d="M58,25 C58,22 60,20 62,20 C64,20 64,22 64,25 Z M60,19 C61.5,19 62.5,17.5 62.5,16 C62.5,14.5 61.5,13.5 60,13.5 C58.5,13.5 57.5,14.5 57.5,16 C57.5,17.5 58.5,19 60,19 Z"/>
+                    <line x1="45" y1="18" x2="68" y2="28" stroke="currentColor" stroke-width="1.2"/>
+                </svg>
+            </div>
+            <div class="footer-mist-layer mist-1"></div>
+            <div class="footer-mist-layer mist-2"></div>
+            <div class="footer-water-ripples">
+                <div class="ripple ripple-1"></div>
+                <div class="ripple ripple-2"></div>
+                <div class="ripple ripple-3"></div>
+            </div>
+        </div>
 
         <!-- Desktop Footer Layout -->
         <div class="footer-desktop-content">
@@ -1054,7 +1078,7 @@
                     <!-- Column 1: Brand -->
                     <div class="footer-col footer-col-brand">
                         <a href="index.html" class="logo footer-logo">
-                            <img src="assets/logo-icon.webp" alt="Moon Island Logo" class="brand-logo-icon">
+                            <img src="assets/logo-icon.webp" alt="Moon Island Logo" class="brand-logo-icon" loading="lazy" decoding="async">
                             <div class="logo-text-wrapper">
                                 <span class="logo-title">MOON ISLAND</span>
                                 <span class="logo-tagline">A Hidden Island of Calm</span>
@@ -1195,7 +1219,7 @@
                 <!-- 1. Logo Section -->
                 <div class="mobile-logo-section">
                     <a href="index.html" class="mobile-footer-logo">
-                        <img src="assets/logo-icon.webp" alt="Moon Island Logo" class="mobile-brand-logo-icon">
+                        <img src="assets/logo-icon.webp" alt="Moon Island Logo" class="mobile-brand-logo-icon" loading="lazy" decoding="async">
                         <div class="mobile-logo-text-wrapper">
                             <span class="logo-title">MOON ISLAND</span>
                             <span class="logo-tagline">A hidden island of calm</span>
@@ -1340,7 +1364,7 @@
         </defs>
     </svg>
 
-    <script src="script.js?v=9.0"></script>
+    <script src="script.js?v=14.0" defer></script>
 </body>
 
 </html>
