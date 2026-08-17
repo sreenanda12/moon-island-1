@@ -596,6 +596,48 @@
     </footer>
 
     <script src="script.js?v=12.0" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const experience = document.getElementById('experience').value;
+                    const message = document.getElementById('message').value;
+
+                    const experienceMap = {
+                        'kayaking': 'Kayaking',
+                        'shikkara': 'Shikkara Ride',
+                        'homestay': 'Boutique Homestay',
+                        'package': 'Curated Package',
+                        'custom': 'Custom Experience'
+                    };
+                    const selectedExperience = experienceMap[experience] || experience;
+                    
+                    const whatsappNumber = '919961577599';
+                    let whatsappMessage = `*New Inquiry from Website*\n\n`;
+                    whatsappMessage += `*Name:* ${name}\n`;
+                    whatsappMessage += `*Email:* ${email}\n`;
+                    whatsappMessage += `*Phone:* ${phone}\n`;
+                    if (experience) {
+                        whatsappMessage += `*Experience:* ${selectedExperience}\n`;
+                    }
+                    if (message) {
+                        whatsappMessage += `*Message:* ${message}\n`;
+                    }
+                    
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
