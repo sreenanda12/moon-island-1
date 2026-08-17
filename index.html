@@ -13,7 +13,26 @@
         content="Discover Moon Island - A premium luxury tourism destination in Kerala. Experience kayaking, shikkara rides, and boutique stays in a serene moon light atmosphere.">
 
     <!-- SEO & Favicon -->
-    <link rel="canonical" href="index.html" />
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://YOUR-DOMAIN.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://YOUR-DOMAIN.com/">
+    <meta property="og:title" content="Moon Island | Luxury Backwater Experiences Kerala">
+    <meta property="og:description"
+        content="Discover Moon Island - A premium luxury tourism destination in Kerala. Experience kayaking, shikkara rides, and boutique stays in a serene moon light atmosphere.">
+    <meta property="og:image" content="https://YOUR-DOMAIN.com/assets/logo-icon.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://YOUR-DOMAIN.com/">
+    <meta property="twitter:title" content="Moon Island | Luxury Backwater Experiences Kerala">
+    <meta property="twitter:description"
+        content="Discover Moon Island - A premium luxury tourism destination in Kerala. Experience kayaking, shikkara rides, and boutique stays in a serene moon light atmosphere.">
+    <meta property="twitter:image" content="https://YOUR-DOMAIN.com/assets/logo-icon.webp">
+
+
 
     <!-- Critical Resource Preloads -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +46,43 @@
     <link href="https://db.onlinewebfonts.com/c/cf73d2680fe0e0d00f78c7295e3617e0?family=Selima" rel="stylesheet"
         type="text/css" />
     <link rel="stylesheet" href="./style.css?v=23.0">
+        <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://YOUR-DOMAIN.com/#website",
+          "url": "https://YOUR-DOMAIN.com/",
+          "name": "Moon Island"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://YOUR-DOMAIN.com/#organization",
+          "name": "Moon Island",
+          "url": "https://YOUR-DOMAIN.com/",
+          "logo": "https://YOUR-DOMAIN.com/assets/logo-icon.webp",
+          "email": "mooonisland21@gmail.com",
+          "telephone": "+919961577599",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Poothotta",
+            "addressRegion": "Kerala",
+            "addressCountry": "IN"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://YOUR-DOMAIN.com/#webpage",
+          "url": "https://YOUR-DOMAIN.com/",
+          "name": "Moon Island",
+          "description": "A premium luxury tourism destination in Kerala.",
+          "isPartOf": { "@id": "https://YOUR-DOMAIN.com/#website" }
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body class="home-page">
@@ -34,7 +90,7 @@
     <div id="premium-loader" class="loader-overlay">
         <div class="loader-logo-container">
             <div class="logo">
-                <img src="assets/logo-icon.webp" alt="Moon Island" class="brand-logo-icon">
+                <img src="assets/logo-icon.webp" alt="Moon Island Luxury Backwater Resort Logo" class="brand-logo-icon">
                 <div class="logo-text-wrapper">
                     <span class="logo-title">MOON ISLAND</span>
                     <span class="logo-tagline">A hidden island of calm</span>
@@ -149,7 +205,7 @@
     <header class="navbar" id="main-nav">
         <div class="container nav-container">
             <a href="index.html" class="logo">
-                <img src="assets/logo-icon.webp" alt="Moon Island" class="brand-logo-icon">
+                <img src="assets/logo-icon.webp" alt="Moon Island Luxury Backwater Resort Logo" class="brand-logo-icon">
                 <div class="logo-text-wrapper">
                     <span class="logo-title">MOON ISLAND</span>
                     <span class="logo-tagline">A hidden island of calm</span>
@@ -247,7 +303,7 @@
                     <div class="featured-image-wrapper">
                         <div class="stars-bg-behind-card"></div>
                         <div class="featured-image-frame v2">
-                            <img src="assets/hero_night_v2.webp" alt="Moon Island Resort" class="destination-image"
+                            <img src="assets/hero_night_v2.webp" alt="A serene moonlit night view of Moon Island luxury backwater resort in Kerala" class="destination-image"
                                 loading="lazy" decoding="async">
                             <div class="glass-highlight"></div>
                         </div>
@@ -387,7 +443,7 @@
                                 <!-- FRONT SIDE -->
                                 <div class="card-face card-front">
                                     <div class="experience-img-wrapper">
-                                        <img src="kayaking.png" alt="Kayaking" loading="lazy" decoding="async">
+                                        <img src="kayaking.png" alt="Guests enjoying a peaceful sunset kayaking experience on the Kerala backwaters" loading="lazy" decoding="async">
                                     </div>
                                     <div class="card-front-overlay">
                                         <span class="category-badge">Adventure</span>
@@ -441,7 +497,7 @@
                                 <!-- FRONT SIDE -->
                                 <div class="card-face card-front">
                                     <div class="experience-img-wrapper">
-                                        <img src="assets/boat.webp" alt="Shikkara Boating" loading="lazy"
+                                        <img src="assets/boat.webp" alt="Traditional wooden Shikkara boat cruising through the calm backwaters of Poothotta" loading="lazy"
                                             decoding="async">
                                     </div>
                                     <div class="card-front-overlay">
@@ -496,7 +552,7 @@
                                 <!-- FRONT SIDE -->
                                 <div class="card-face card-front">
                                     <div class="experience-img-wrapper">
-                                        <img src="assets/village.webp" alt="Village Walk" loading="lazy"
+                                        <img src="assets/village.webp" alt="Local village walk showing the authentic cultural heritage of Kerala backwaters" loading="lazy"
                                             decoding="async">
                                     </div>
                                     <div class="card-front-overlay">
@@ -551,7 +607,7 @@
                                 <!-- FRONT SIDE -->
                                 <div class="card-face card-front">
                                     <div class="experience-img-wrapper">
-                                        <img src="assets/homestay.webp" alt="Boutique Homestay" loading="lazy"
+                                        <img src="assets/homestay.webp" alt="Luxurious and traditional boutique homestay accommodation at Moon Island" loading="lazy"
                                             decoding="async">
                                     </div>
                                     <div class="card-front-overlay">
@@ -851,7 +907,7 @@
                             <!-- Magazine Style Image Frame -->
                             <div class="editorial-image-frame">
                                 <div class="editorial-image-inner">
-                                    <img src="p4.webp" alt="Discover Life Along The Backwaters"
+                                    <img src="p4.webp" alt="Vibrant local life and scenic water landscapes along the Kerala backwaters"
                                         class="editorial-featured-image" loading="lazy" decoding="async">
                                     <div class="editorial-image-overlay"></div>
                                 </div>
@@ -897,20 +953,20 @@
                         <div class="price">₹599<span>/person</span></div>
                         <ul class="package-features">
                             <li>Kayaking (2.5 hrs)</li>
-                            <li>Kanal route</li>
+                            <li>mangrove canal ride</li>
                         </ul>
                         <a href="services.html" class="btn btn-outline">Learn More</a>
                     </div>
 
                     <div class="package-card popular">
                         <div class="badge">Most Popular</div>
-                        <h3>Day Escape Package</h3>
-                        <div class="price">₹1,999<span>/person</span></div>
+                        <h3>Island hopping</h3>
+                        <div class="price">₹2,000<span>/hr</span></div>
                         <ul class="package-features">
-                            <li>Kayaking (2.5 hrs)</li>
-                            <li>Shikkara Ride</li>
-                            <li>Village Walk</li>
-                            <li>Pool Access</li>
+                            <li>13 people boat </li>
+                            <li>Vembanadu lake cruise </li>
+                            <li>Magic island visit </li>
+                            <li>Island hopping</li>
                         </ul>
                         <a href="contact.html" class="btn btn-primary">Book Now</a>
                     </div>
@@ -1081,7 +1137,7 @@
                     <!-- Column 1: Brand -->
                     <div class="footer-col footer-col-brand">
                         <a href="index.html" class="logo footer-logo">
-                            <img src="assets/logo-icon.webp" alt="Moon Island Logo" class="brand-logo-icon"
+                            <img src="assets/logo-icon.webp" alt="Moon Island Signature Gold Emblem" class="brand-logo-icon"
                                 loading="lazy" decoding="async">
                             <div class="logo-text-wrapper">
                                 <span class="logo-title">MOON ISLAND</span>
@@ -1096,7 +1152,7 @@
 
                     <!-- Column 2: Explore -->
                     <div class="footer-col">
-                        <h4 class="footer-col-title">Explore</h4>
+                        <h2 class="footer-col-title">Explore</h2>
                         <ul class="footer-links">
                             <li><a href="index.html">Home</a></li>
                             <li><a href="about.html">About</a></li>
@@ -1107,18 +1163,18 @@
 
                     <!-- Column 3: Experiences -->
                     <div class="footer-col">
-                        <h4 class="footer-col-title">Experiences</h4>
+                        <h2 class="footer-col-title">Experiences</h2>
                         <ul class="footer-links">
-                            <li><a href="services.html">Kayaking</a></li>
-                            <li><a href="services.html">Shikkara Boating</a></li>
-                            <li><a href="services.html">Village Walk</a></li>
-                            <li><a href="services.html">Boutique Homestay</a></li>
+                            <li><a href="services.html#kayaking">Kayaking</a></li>
+                            <li><a href="services.html#shikkara">Shikkara Boating</a></li>
+                            <li><a href="services.html#village">Village Walk</a></li>
+                            <li><a href="services.html#homestay">Boutique Homestay</a></li>
                         </ul>
                     </div>
 
                     <!-- Column 4: Activities -->
                     <div class="footer-col">
-                        <h4 class="footer-col-title">Activities</h4>
+                        <h2 class="footer-col-title">Activities</h2>
                         <ul class="footer-links">
                             <li><a href="services.html">Coir Making</a></li>
                             <li><a href="services.html">Leaf Weaving</a></li>
@@ -1129,7 +1185,7 @@
 
                     <!-- Column 5: Contact -->
                     <div class="footer-col footer-col-contact">
-                        <h4 class="footer-col-title">Contact</h4>
+                        <h2 class="footer-col-title">Contact</h2>
                         <ul class="footer-contact-list">
                             <li class="footer-contact-item">
                                 <span class="contact-icon-wrapper">
@@ -1193,8 +1249,8 @@
                         <p class="copyright">&copy; 2026 Moon Island. All rights reserved.</p>
                     </div>
                     <div class="footer-socials">
-                        <a href="https://www.instagram.com/moon_islandd?igsh=YjNvdjU3eHdmNzgx&igsi=YjNvdjU3eHdmNzgx" target="_blank" rel="noopener"
-                            class="footer-social-icon social-btn" aria-label="Instagram">
+                        <a href="https://www.instagram.com/moon_islandd?igsh=YjNvdjU3eHdmNzgx&igsi=YjNvdjU3eHdmNzgx"
+                            target="_blank" rel="noopener" class="footer-social-icon social-btn" aria-label="Instagram">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -1222,7 +1278,7 @@
                 <!-- 1. Logo Section -->
                 <div class="mobile-logo-section">
                     <a href="index.html" class="mobile-footer-logo">
-                        <img src="assets/logo-icon.webp" alt="Moon Island Logo" class="mobile-brand-logo-icon"
+                        <img src="assets/logo-icon.webp" alt="" class="mobile-brand-logo-icon"
                             loading="lazy" decoding="async">
                         <div class="mobile-logo-text-wrapper">
                             <span class="logo-title">MOON ISLAND</span>
@@ -1238,8 +1294,8 @@
 
                 <!-- 3. Social Icons Section -->
                 <div class="mobile-social-icons">
-                    <a href="https://www.instagram.com/moon_islandd?igsh=YjNvdjU3eHdmNzgx&igsi=YjNvdjU3eHdmNzgx" target="_blank" rel="noopener" class="mobile-social-btn"
-                        aria-label="Instagram">
+                    <a href="https://www.instagram.com/moon_islandd?igsh=YjNvdjU3eHdmNzgx&igsi=YjNvdjU3eHdmNzgx"
+                        target="_blank" rel="noopener" class="mobile-social-btn" aria-label="Instagram">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                             stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -1247,8 +1303,8 @@
                             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                         </svg>
                     </a>
-                    <a href="https://www.facebook.com/share/1CzgqVfX1g/" target="_blank" rel="noopener" class="mobile-social-btn"
-                        aria-label="Facebook">
+                    <a href="https://www.facebook.com/share/1CzgqVfX1g/" target="_blank" rel="noopener"
+                        class="mobile-social-btn" aria-label="Facebook">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
@@ -1276,7 +1332,7 @@
                 <!-- 4. Navigation Grid -->
                 <div class="mobile-nav-grid">
                     <div class="mobile-nav-col">
-                        <h4 class="mobile-nav-title">Explore</h4>
+                        <h2 class="mobile-nav-title">Explore</h2>
                         <ul class="mobile-nav-links">
                             <li><a href="index.html">Home</a></li>
                             <li><a href="about.html">About</a></li>
@@ -1285,16 +1341,16 @@
                         </ul>
                     </div>
                     <div class="mobile-nav-col">
-                        <h4 class="mobile-nav-title">Experiences</h4>
+                        <h2 class="mobile-nav-title">Experiences</h2>
                         <ul class="mobile-nav-links">
-                            <li><a href="services.html">Kayaking</a></li>
-                            <li><a href="services.html">Shikkara Boating</a></li>
-                            <li><a href="services.html">Village Walk</a></li>
-                            <li><a href="services.html">Boutique Homestay</a></li>
+                            <li><a href="services.html#kayaking">Kayaking</a></li>
+                            <li><a href="services.html#shikkara">Shikkara Boating</a></li>
+                            <li><a href="services.html#village">Village Walk</a></li>
+                            <li><a href="services.html#homestay">Boutique Homestay</a></li>
                         </ul>
                     </div>
                     <div class="mobile-nav-col">
-                        <h4 class="mobile-nav-title">Support</h4>
+                        <h2 class="mobile-nav-title">Support</h2>
                         <ul class="mobile-nav-links">
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Privacy Policy</a></li>
